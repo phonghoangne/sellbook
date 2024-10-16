@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='option')}">
+
+</head>
+
+<body>
+<!-- message_header -->
+<th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+
+<!--<header>-->
+<!--        <div class="container">-->
+<!--            <div class="header__container">-->
+<!--                &lt;!&ndash; logo header &ndash;&gt;-->
+<!--                <div class="header__container-logo">-->
+<!--                    <a href="index.html">-->
+<!--                        <img src="images/logo-no-background.png" alt="">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; end logo header &ndash;&gt;-->
+
+<!--                &lt;!&ndash; navbar_header &ndash;&gt;-->
+<!--                <ul class="header__container-nav">-->
+<!--                    <li>-->
+<!--                        <a href="index.html">-->
+<!--                            trang chủ-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="" class="flex-center">-->
+<!--                            sản phẩm <i class="fa-solid fa-angle-down"></i>-->
+<!--                        </a>-->
+
+<!--                        <div class="sub_menu">-->
+<!--                            <ul>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="" class="text-sale">-->
+<!--                            sale-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            hàng mới về-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            chính sách-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            cửa hàng-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            về chúng tôi-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                &lt;!&ndash; end navbar_header &ndash;&gt;-->
+
+<!--                &lt;!&ndash; option user &ndash;&gt;-->
+<!--                <ul class="header__container-option">-->
+<!--                    <li class="option__user search">-->
+<!--                        <i class="fa-solid fa-magnifying-glass"></i>-->
+<!--                    </li>-->
+
+<!--                    <li class="option__user user">-->
+<!--                        <i class="fa-regular fa-user"></i>-->
+<!--                        <div class="option__user-sub account">-->
+<!--                            <ul class="option__user-sub-list">-->
+<!--                                <li class="option__user-sub-list-item">-->
+<!--                                    <a href="login.html">-->
+<!--                                        tài khoản-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="option__user-sub-list-item">-->
+<!--                                    <a href="">-->
+<!--                                        yêu thích-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="option__user-sub-list-item">-->
+<!--                                    <a href="">-->
+<!--                                        giỏ hàng-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="option__user-sub-list-item">-->
+<!--                                    <a href="register.html">-->
+<!--                                        đăng xuất-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+<!--                    <li class="option__user like">-->
+<!--                        <i class="fa-regular fa-heart"></i>-->
+<!--                    </li>-->
+
+<!--                    <li class="option__user cart">-->
+<!--                        <i class="fa-solid fa-bag-shopping"></i>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                &lt;!&ndash; end option user &ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </header>-->
+
+    <main>
+        <div class="wrapper">
+            <section class="option__developers">
+                <div class="option__developers-title">
+                    Thành viên phát triển
+                </div>
+
+                <ul class="list__developer">
+            
+                    <li class="list__developer-item">
+                        <div class="developer__item-name">
+                            <a th:href="@{/info/info1}">
+                                Phong ngu
+                            </a>
+                        </div>
+
+                        <div class="developer__item-banner">
+                            <a th:href="@{/info/info1}"><img src="https://hapodigital.com/wp-content/uploads/2022/10/banner-la-gi.png" alt=""></a>
+                        </div>
+                    </li>
+                    <li class="list__developer-item">
+                        <div class="developer__item-name">
+                            <a th:href="@{/info/info2}">
+                                Hùng
+                            </a>
+                        </div>
+
+                        <div class="developer__item-banner">
+                            <a th:href="@{/info/info2}"><img src="https://hapodigital.com/wp-content/uploads/2022/10/banner-la-gi.png" alt=""></a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

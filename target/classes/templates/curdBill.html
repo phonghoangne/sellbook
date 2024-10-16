@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Management - Bill')}">
+
+</head>
+
+
+<body>
+    <!-- header -->
+    <th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+    <!-- end header -->
+
+    <section class="location">
+        <div class="container">
+            <div class="location__container">
+                <div class="location__history">
+                    <a th:href="@{/admin}">
+                        Trang chủ
+                    </a>
+                </div>
+                <div class="">/</div>
+
+                <div class="location__now">
+                    <a href="">
+                       CURD
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="layout__container">
+                    <div class="layout__container-head">
+                        <div class="layout__container-head-title">
+                            <h3>
+                                CURD
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="layout__container-body">
+                        <th:block th:insert="~{/common/fragument.html :: body_left_admin}"></th:block>
+
+                        <div class="layout__container-body-right">
+                            <div class="layout__container-body-right-form" th:if="${billView != null}" th:object="${billView}">
+                                <div class="bill__container">
+                                    <div class="bill__container-title">
+                                        Your order
+                                    </div>
+
+                                    <div class="bill__container-about">
+                                        <div class="bill__container-about-box">
+                                            <div class="bill__container-about-box-title">
+                                                OrderID :
+                                            </div>
+
+                                            <div class="bill__container-about-box-content">
+                                                <span th:text="*{bill.id}"></span>
+                                            </div>
+                                        </div>
+                                        <div class="bill__container-about-box">
+                                            <div class="bill__container-about-box-title">
+                                                Name :
+                                            </div>
+
+                                            <div class="bill__container-about-box-content">
+                                                <span th:text="*{bill.account.fullname}"></span>
+                                            </div>
+                                        </div>
+                                        <div class="bill__container-about-box">
+                                            <div class="bill__container-about-box-title">
+                                                Phone :
+                                            </div>
+
+                                            <div class="bill__container-about-box-content">
+                                                <span th:text="*{bill.phoneNumber}"></span>
+                                            </div>
+                                        </div>
+                                        <div class="bill__container-about-box">
+                                            <div class="bill__container-about-box-title">
+                                                Email :
+                                            </div>
+
+                                            <div class="bill__container-about-box-content">
+                                                <span th:text="*{bill.account.getEmail()}"></span>
+                                            </div>
+                                        </div>
+                                        <div class="bill__container-about-box">
+                                            <div class="bill__container-about-box-title">
+                                                Create Date :
+                                            </div>
+
+                                            <div class="bill__container-about-box-content">
+                                                <span th:text="*{bill.getInvoiceDate()}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bill__container-products">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    Product
+                                                </th>
+                                                <th>
+                                                    Price
+                                                </th>
+                                                <th>
+                                                    Quantity
+                                                </th>
+                                                <th>
+                                                    Total
+                                                </th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            <tr  th:each="item ,index : ${ListbillView}">
+                                                <td th:text="${index.index}">1</td>
+                                                <td th:text="${item.book.name}">Cẩm Nang Luyện Thi Năng Lực Tiếng Hàn Topik II Intermediate -
+                                                    Advanced</td>
+                                                <td><p><span   th:text="${#numbers.formatDecimal(item.book.price, 0 ,'COMMA',0,'POINT')}"></span>￥</p></td>
+                                                <td th:text="${item.qty}">1</td>
+                                                <td >
+                                                    <p><span th:text="${#numbers.formatDecimal(item.totalProduct, 0 ,'COMMA',0,'POINT')}"></span>￥</p>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="bill__container-total">
+                                        <div class="bill__container-total-title">
+                                            Total
+                                        </div>
+                                        <div class="bill__container-total-content">
+                                            <span th:text="${#numbers.formatDecimal(totalBill, 0 ,'COMMA',0,'POINT')}"></span>￥
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+<!--                            <div id="book-modal" class="modal">-->
+<!--                                <div class="modal-content">-->
+<!--                                    <span class="close" id="close-button">&times;</span>-->
+<!--                                    <h2>Thông Tin Sách</h2>-->
+<!--                                    <form id="book-form">-->
+<!--                                        &lt;!&ndash; Các trường nhập thông tin sách sẽ ở đây &ndash;&gt;-->
+<!--                                        <button type="button" id="save-button">Lưu</button>-->
+<!--                                        <button type="button" id="cancel-button">Hủy</button>-->
+<!--                                    </form>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                    <div class="layout__container-body-right-table pd-b-2">
+                        <table class="book-table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>InvoiceDate</th>
+                                <th>totalAmount</th>
+                                <th>Note</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody id="book-list">
+                            <tr th:each=" item: ${listBill}">
+                                <td th:text="${item.id}">1</td>
+                                <td th:text="${item.address}">Tiểu thuyết A</td>
+                                <td th:text="${item.phoneNumber}">Tiểu thuyết A</td>
+                                <td th:text="${item.invoiceDate}">Tiểu thuyết A</td>
+                                <td>
+                                    <p> <span th:text="${#numbers.formatDecimal(item.totalAmount, 0, 'COMMA', 0, 'POINT')}"></span> ￥</p>
+                                </td>
+
+                                <td th:text="${item.note}">Tiểu thuyết A</td>
+                                <td>
+                                    <a class="action-button edit-button" th:href="@{/admin/view/bill(id=${item.id})}">Xem</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <th:block th:if="${totalPages > 1}">
+                            <div class="pagination__container">
+                                <div class="pagination">
+                                    <ul> <!--pages or li are comes from javascript --> </ul>
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+</body>
+
+<script th:src="@{/js/header-overlay.js}"></script>
+<script th:inline="javascript">
+    const selectForm = document.querySelector('.layout__container-body-right-title');
+    const selectCategory = document.querySelector('.filter__category-head');
+
+    selectCategory.addEventListener('click', () => {
+        const parentElement = selectCategory.parentElement;
+        const icon = selectCategory.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const list = parentElement.querySelector('.filter__category-list');
+        list.style.display = list.style.display == 'none' ? 'block' : 'none';
+    
+    })
+
+    selectForm.addEventListener('click', () => {
+        const parentElement = selectForm.parentElement;
+        const icon = selectForm.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const form = parentElement.querySelector('form');
+        form.style.display = form.style.display == 'none' ? 'flex' : 'none';
+    })
+</script>
+<script th:inline="javascript">
+    // js for pagination
+    const element = document.querySelector(".pagination ul");
+    let totalPages = [[${totalPages}]];
+    let currentPage = [[${currentPage}]];  // Đặt giá trị page bắt đầu từ 0
+    let categoryId = [[${categoryId}]];
+    element.innerHTML = createPagination(totalPages, currentPage);
+
+    function createPagination(totalPages, currentPage) {
+        let liTag = '';
+        let active;
+        let beforePage = currentPage - 1;
+        let afterPage = currentPage + 1;
+
+        if (currentPage > 0) {
+
+            liTag += `<li class="btn prev" onclick="changePage(${currentPage - 1})"><span><i class="fas fa-angle-left"></i> Prev</span></li>`;
+        }
+
+        if (currentPage == totalPages) {
+            beforePage = beforePage - 2;
+        } else if (currentPage == totalPages - 1) {
+            beforePage = beforePage - 1;
+        }
+
+        if (currentPage == 0) {
+            afterPage = afterPage + 2;
+        } else if (currentPage == 1) {
+            afterPage = afterPage + 1;
+        }
+
+        for (var plength = beforePage; plength <= afterPage; plength++) {
+            if (plength >= totalPages) {
+                continue;
+            }
+
+            if (plength < 0) {
+                plength = plength + 1;
+            }
+
+            if (currentPage == plength) {
+                active = "active";
+            } else {
+                active = "";
+            }
+
+            liTag += `<li class="numb ${active}" onclick="changePage(${plength})"><span>${plength + 1}</span></li>`;
+        }
+
+        if (currentPage < totalPages - 1) {
+            if (currentPage < totalPages - 2) {
+                liTag += `<li class="dots"><span>...</span></li>`;
+            }
+        }
+
+        if (currentPage < totalPages - 1) {
+            liTag += `<li class="btn next" onclick="changePage(${currentPage + 1})"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+        }
+
+        element.innerHTML = liTag;
+        return liTag;
+    }
+
+    function changePage(newPage) {
+
+        window.location.href = `http://localhost:9999/admin/bill?page=${newPage}`;
+    }
+</script>
+</html>

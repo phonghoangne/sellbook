@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Management')}">
+
+</head>
+
+
+<body>
+    <!-- header -->
+    <th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+    <!-- end header -->
+
+    <section class="location">
+        <div class="container">
+            <div class="location__container">
+                <div class="location__history">
+                    <a th:href="@{/admin}">
+                        Trang chủ
+                    </a>
+                </div>
+                <div class="">/</div>
+
+                <div class="location__now">
+                    <a th:href="@{/admin/category}">
+                        Management Category.
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="layout__container">
+                    <div class="layout__container-head">
+                        <div class="layout__container-head-title">
+                            <h3>
+                                CURD
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="layout__container-body">
+                        <th:block th:insert="~{/common/fragument.html :: body_left_admin}"></th:block>
+
+                        <div class="layout__container-body-right">
+                            <div class="layout__container-body-right-form">
+                                <div class="layout__container-body-right-title">
+                                    Form CURD
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <form action="/admin/category/edit" method="post" th:object="${editCategory}">
+                                    <div class="alert__container top"  th:if="${success != null}">
+                                        <div class="alert__container-item success">
+                                            <div class="alert__content">
+                                                <div class="alert__content-title">
+                                                    <h2>Notification</h2>
+                                                </div>
+
+                                                <div class="alert__content-sub">
+                                                    <p th:text="${success}" >Change a few things up and try submitting again</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id">ID:</label>
+                                        <input type="text" id="id" name="id" th:field="*{id}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id1">ID:</label>
+                                        <input type="hidden" id="id1" name="id" th:field="*{id}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Loại sách:</label>
+                                        <input type="text" id="name" name="name"  th:field="*{name}">
+                                    </div>
+                                    <button type="submit">Thêm Loại Sách</button>
+                                </form>
+                            </div>
+
+                            <div class="layout__container-body-right-table">
+                                <table class="book-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Loại Sách</th>
+                                            <th>Hành Động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="book-list">
+                                        <tr th:each=" item: ${categoryList}">
+                                            <td th:text="${item.id}">1</td>
+                                            <td th:text="${item.name}">Tiểu thuyết A</td>
+                                            <td>
+                                                <a class="action-button edit-button" th:href="@{/admin/category/edit(id=${item.id})}">Sửa</a>
+                                                <a class="action-button delete-button">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="book-modal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" id="close-button">&times;</span>
+                                    <h2>Thông Tin Sách</h2>
+                                    <form id="book-form">
+                                        <!-- Các trường nhập thông tin sách sẽ ở đây -->
+                                        <button type="button" id="save-button">Lưu</button>
+<!--                                        <button type="button" id="cancel-button">Hủy</button>-->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+</body>
+
+<script th:src="@{/js/header-overlay.js}"></script>
+<script>
+    const selectForm = document.querySelector('.layout__container-body-right-title');
+    const selectCategory = document.querySelector('.filter__category-head');
+
+    selectCategory.addEventListener('click', () => {
+        const parentElement = selectCategory.parentElement;
+        const icon = selectCategory.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const list = parentElement.querySelector('.filter__category-list');
+        list.style.display = list.style.display == 'none' ? 'block' : 'none';
+    
+    })
+
+    selectForm.addEventListener('click', () => {
+        const parentElement = selectForm.parentElement;
+        const icon = selectForm.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const form = parentElement.querySelector('form');
+        form.style.display = form.style.display == 'none' ? 'flex' : 'none';
+    })
+    function removeAlertContainer() {
+        var alertContainer = document.querySelector('.alert__container');
+        if (alertContainer) {
+            alertContainer.remove();
+        }
+    }
+
+    setTimeout(removeAlertContainer, 5000);
+</script>
+
+</html>

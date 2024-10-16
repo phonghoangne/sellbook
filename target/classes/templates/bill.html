@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='bill')}">
+
+</head>
+
+<body>
+<!-- message_header -->
+<th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+
+<!-- end header -->
+
+    <section class="location">
+        <div class="container">
+            <div class="location__container">
+                <div class="location__history">
+                    <a th:href="@{/home/view}">
+                        Trang chủ
+                    </a>
+                </div>
+                <div class="">/</div>
+
+                <div class="location__now">
+                    <a href="">
+                        BILL
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <main>
+        <div class="container">
+            <div class="bill__container">
+                <div class="bill__container-title">
+                    Your order
+                </div>
+
+                <div class="bill__container-about">
+                    <div class="bill__container-about-box">
+                        <div class="bill__container-about-box-title">
+                            OrderID :
+                        </div>
+
+                        <div class="bill__container-about-box-content">
+                            <span th:text="${bill.id}"></span>
+                        </div>
+                    </div>
+                    <div class="bill__container-about-box">
+                        <div class="bill__container-about-box-title">
+                            Name :
+                        </div>
+
+                        <div class="bill__container-about-box-content">
+                            <span th:text="${bill.account.fullname}"></span>
+                        </div>
+                    </div>
+                    <div class="bill__container-about-box">
+                        <div class="bill__container-about-box-title">
+                            Phone :
+                        </div>
+
+                        <div class="bill__container-about-box-content">
+                            <span th:text="${bill.phoneNumber}"></span>
+                        </div>
+                    </div>
+                    <div class="bill__container-about-box">
+                        <div class="bill__container-about-box-title">
+                            Email :
+                        </div>
+
+                        <div class="bill__container-about-box-content">
+                            <span th:text="${bill.account.email}"></span>
+                        </div>
+                    </div>
+                    <div class="bill__container-about-box">
+                        <div class="bill__container-about-box-title">
+                            Create Date :
+                        </div>
+
+                        <div class="bill__container-about-box-content">
+                            <span th:text="${bill.invoiceDate}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bill__container-products">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    Product
+                                </th>
+                                <th>
+                                    Price
+                                </th>
+                                <th>
+                                    Quantity
+                                </th>
+                                <th>
+                                    Total
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="item,itemStart : ${bill.book}">
+                                <td th:text="${itemStart.index + 1}">1</td>
+                                <td th:text="${item.name}">Cẩm Nang Luyện Thi Năng Lực Tiếng Hàn Topik II Intermediate - Advanced</td>
+                                <td> <p> <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span> ￥</p></td>
+                                <td>
+                                    <th:block th:each="entry:${quantiyBook}" >
+                                        <span th:if="${item.getId() == entry.key}" th:text="${entry.value}"></span>
+                                    </th:block>
+                                </td>
+                                <td>
+                                    <th:block th:each="entry:${quantiyBook}" >
+                                        <p th:if="${item.getId() == entry.key}" >
+                                            <span th:text="${#numbers.formatDecimal(entry.value * item.price, 0, 'COMMA', 0, 'POINT')}"></span>￥
+                                        </p>
+                                    </th:block>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bill__container-total">
+                    <div class="bill__container-total-title">
+                        Total
+                    </div>
+
+                    <div class="bill__container-total-content">
+                        <span th:text="${#numbers.formatDecimal(priceTotalCart1, 0, 'COMMA', 0, 'POINT')}"></span>￥
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+</body>
+<script th:src="@{/js/header-overlay.js}"></script>
+</html>

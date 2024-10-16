@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Product - Details')}">
+
+</head>
+<body>
+<!-- message_header -->
+    <th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+<!-- end header -->
+
+    <main>
+        <section class="location">
+            <div class="container">
+                <div class="location__container">
+                    <div class="location__history">
+                        <a th:href="@{/home/view}">
+                            Trang chủ /
+                        </a>
+
+                        <a th:href="@{/book/category(categoryId = ${searchBook.category.id})}">
+                            <span th:text="${searchBook.getCategory().name}"></span>
+                        </a>
+                    </div>
+                    <div class="">/</div>
+
+                    <div class="location__now">
+                        <a href="">
+                            <span th:text="${searchBook.name}"> </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="product">
+            <div class="container">
+                <div class="container__layout">
+                    <div class="container__layout-left">
+                        <div class="img__product">
+                            <img th:src="@{http://localhost:9999/uploads/__${searchBook.img}__}" alt="">
+                        </div>
+
+<!--                        <ul class="list__image-sub">-->
+<!--                            <li class="list__image-sub-item active">-->
+<!--                                <img th:src="@{http://localhost:9999/uploads/__${searchBook.img}__}" alt="">-->
+<!--                            </li>-->
+
+<!--                            <li class="list__image-sub-item">-->
+<!--                                <img th:src="@{http://localhost:9999/uploads/__${searchBook.img}__}" alt="">-->
+<!--                            </li>-->
+
+<!--                            <li class="list__image-sub-item">-->
+<!--                                <img th:src="@{http://localhost:9999/uploads/__${searchBook.img}__}" alt="">-->
+<!--                            </li>-->
+
+<!--                            <li class="list__image-sub-item">-->
+<!--                                <img src="images/product-2.png" alt="">-->
+<!--                            </li>-->
+
+<!--                            <li class="list__image-sub-item">-->
+<!--                                <img src="images/product-2.png" alt="">-->
+<!--                            </li>-->
+
+<!--                            <li class="list__image-sub-item">-->
+<!--                                <img src="images/product-2.png" alt="">-->
+<!--                            </li>-->
+
+<!--                            <li class="list__image-sub-item">-->
+<!--                                <img src="images/product-2.png" alt="">-->
+<!--                            </li>-->
+
+<!--                            <li class="list__image-sub-item">-->
+<!--                                <img src="images/product-2.png" alt="">-->
+<!--                            </li>-->
+
+<!--                            <li class="list__image-sub-item">-->
+<!--                                <img src="images/product-2.png" alt="">-->
+<!--                            </li>-->
+
+<!--                            <li class="list__image-sub-item">-->
+<!--                                <img src="images/product-2.png" alt="">-->
+<!--                            </li>-->
+
+<!--                            <li class="list__image-sub-item">-->
+<!--                                <img src="images/product-2.png" alt="">-->
+<!--                            </li>-->
+<!--                        </ul>-->
+
+<!--                        <div class="highlight__product">-->
+<!--                            <div class="highlight__product-title">-->
+<!--                                Đặc điểm nổi bật-->
+<!--                            </div>-->
+<!--                            <ul class="highlight__product-list">-->
+<!--                                <li class="highlight__product-list-item">-->
+<!--                                    <div class="icon">-->
+<!--                                        <i class="fa-solid fa-check"></i>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="content">-->
+<!--                                        Cung cấp kiến thức căn bản về kế toán doanh nghiệp.-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                                <li class="highlight__product-list-item">-->
+<!--                                    <div class="icon">-->
+<!--                                        <i class="fa-solid fa-check"></i>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="content">-->
+<!--                                        Cung cấp kiến thức căn bản về kế toán doanh nghiệp.-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                                <li class="highlight__product-list-item">-->
+<!--                                    <div class="icon">-->
+<!--                                        <i class="fa-solid fa-check"></i>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="content">-->
+<!--                                        Cung cấp kiến thức căn bản về kế toán doanh nghiệp.-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+                    </div>
+                    <div class="container__layout-center">
+                        <section class="layout__center-about">
+                            <img src="images/chinhhang.png" alt="" class="img-genuine">
+                            <h4 class="layout__center-about-name" th:text="${searchBook.name}">
+                                Kế Toán Vỉa Hè - Thực Hành Báo Cáo Tài Chính Căn Bản Từ Quầy Bán Nước Chanh
+                            </h4>
+
+                            <div class="layout__center-about-evaluate">
+                                <div class="average-star">
+                                    5.0
+                                </div>
+
+                                <ul class="list__star">
+                                    <li class="list__star-item">
+                                        <i class="fa-solid fa-star"></i>
+                                    </li>
+                                    <li class="list__star-item">
+                                        <i class="fa-solid fa-star"></i>
+                                    </li>
+                                    <li class="list__star-it1em">
+                                        <i class="fa-solid fa-star"></i>
+                                    </li>
+                                    <li class="list__star-item">
+                                        <i class="fa-solid fa-star"></i>
+                                    </li>
+                                    <li class="list__star-item">
+                                        <i class="fa-solid fa-star"></i>
+                                    </li>
+                                </ul>
+
+                                <div class="quality__user-star">
+                                    (120)
+                                </div>
+
+                                <div class="concat"> | </div>
+
+                                <div class="count__sold">
+                                    <div class="count__sold-title">
+                                        Đã bán :
+                                    </div>
+
+                                    <div class="count__sold-value">5000</div>
+                                </div>
+                            </div>
+
+                            <div class="layout__center-about-price">
+                                <div class="layout__center-about-price-value">
+<!--                                    <th:block th:each="entry:${priceList}" >-->
+<!--                                        <span th:if="${searchBook.id == entry.key}" th:text="${entry.value}"></span>-->
+<!--                                    </th:block>-->
+                                    <p> <span th:text="${#numbers.formatDecimal(searchBook.price, 0, 'COMMA', 0, 'POINT')}"></span> ￥</p>
+                                </div>
+
+                                <div class="layout__center-about-price-sale">
+                                    -15%
+                                </div>
+                            </div>
+                        </section>
+
+<!--                        <section class="layout__center-freight">-->
+<!--                            <div class="layout__center-freight-title">-->
+<!--                                Thông tin vận chuyển-->
+<!--                            </div>-->
+
+<!--                            <div class="layout__center-freight-about">-->
+<!--                                <div class="freight__address">-->
+<!--                                    <div class="freight__address-about">-->
+<!--                                        <div class="freight__address-about-now">-->
+<!--                                            Giao đến Q.1, P.Bến Nghé, Hồ Chí Minh-->
+<!--                                        </div>-->
+
+<!--                                        <div class="freight__address-about-change">-->
+<!--                                            <button class="btn__change">-->
+<!--                                                Đổi-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="freight__address-option">-->
+<!--                                        <div class="freight__address-option-now">-->
+<!--                                            <div class="option__freight-item">-->
+<!--                                                <img src="images/now-freight.png" alt=""-->
+<!--                                                    class="img__option-freight img__freight-now">-->
+<!--                                                <div class="option__freight-item-title">-->
+<!--                                                    Giao siêu tốc 2h-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="freight__message">-->
+<!--                                                <p>Trước 12h hôm nay: 10.000₫</p>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="freight__address-option-now">-->
+<!--                                            <div class="option__freight-item">-->
+<!--                                                <img src="images/freight-2.png" alt=""-->
+<!--                                                    class="img__option-freight img__freight-now">-->
+<!--                                                <div class="option__freight-item-title">-->
+<!--                                                    Giao đúng sáng mai-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="freight__message">-->
+<!--                                                <p>8h - 12h, 08/11: Miễn phí</p>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </section>-->
+
+                        <section class="layout__center-product-info">
+                            <div class="layout__center-product-info-title">
+                                Thông tin chi tiết
+                            </div>
+
+
+                            <table>
+                                <tr>
+                                    <td class="td1">Nhà xuất bản</td>
+                                    <td th:text="${searchBook.publishingCompany}">Công ty TNHH Truyền Thông Giver </td>
+                                </tr>
+                                <tr>
+                                    <td class="td1">Tác Giả</td>
+                                    <td th:text="${searchBook.author}">Trần Thanh Phong</td>
+                                </tr>
+                                <tr>
+                                    <td class="td1">Loại sách </td>
+                                    <td th:text="${searchBook.category.name}">Bìa mềm</td>
+                                </tr>
+                                <tr>
+                                    <td class="td1" >Số trang </td>
+                                    <td th:text="${searchBook.numberPages}">268</td>
+                                </tr>
+                                <tr>
+                                    <td class="td1">Ngày phát hành </td>
+                                    <td th:text="${#dates.format(searchBook.publicationDate, 'dd-MMM-yyyy')}">Nhà Xuất Bản Thế Giới </td>
+                                </tr>
+
+                            </table>
+                        </section>
+
+                        <section class="layout__center-product-description">
+                            <div class="layout__center-product-description-title">
+                                Mô tả sản phẩm
+                            </div>
+                            <div class="layout__center-product-description-sub">
+                                <p th:text="${searchBook.description}"> </p>
+                            </div>
+                        </section>
+
+                        <section class="layout__center-product-more">
+                            <div class="layout__center-product-more-title">
+                                Sản phẩm đề xuất
+                            </div>
+
+                            <div class="layout__center-product-more-about">
+                                <ul class="list__product">
+                                    <li class="list__product-item" th:each = "item : ${similarCategory}">
+                                        <div class="product__item-img">
+                                            <a  th:href="@{/book/bookid(id = ${item.id})}">
+                                                <img th:src="@{http://localhost:9999/uploads/__${item.img}__}" alt="">
+                                            </a>
+
+                                            <div class="product__option-buy">
+                                                <a th:href="@{/cart/add(bookId=${item.id})}">
+                                                    <div class="product__option-buy-container">
+                                                        <i class="fa-solid fa-cart-shopping"></i>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <a href="">
+                                                <div class="product__option-buy-container">
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="product__item-about">
+                                            <div class="product__item-about-head">
+                                                <div class="product__item-about-head-name">
+                                                    <a  th:href="@{/book/bookid(id = ${item.id})}">
+                                                        <span th:text="${item.name}"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="product__item-about-body">
+                                                <div class="product__item-about-body-pricenew">
+<!--                                                    <th:block th:each="entry:${priceList}" >-->
+<!--                                                        <span th:if="${item.id == entry.key}" th:text="${entry.value}"></span>-->
+<!--                                                    </th:block>-->
+                                                    <p> <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span> ￥</p>
+                                                </div>
+
+                                            </div>
+
+<!--                                            <div class="product__item-sold">-->
+<!--                                                1000+ sản phẩm đã bán-->
+<!--                                            </div>-->
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="container__layout-right">
+
+                        <div class="layout__right-quality">
+                            <div class="layout__right-quality-title">
+                                Số lượng
+                            </div>
+
+                            <div class="layout__right-quality-handle">
+                                <button class="btn__down-quality btn-quality">
+                                    -
+                                </button>
+
+                                <input type="number" class="input-quality" value="1">
+
+                                <button class="btn__up-quality btn-quality">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="layout__right-price">
+                            <div class="layout__right-price-title">
+                                Tạm tính
+                            </div>
+
+                            <div class="layout__right-price-content" th:attr="data-price= ${searchBook.price}">
+                                <p> <span th:text="${#numbers.formatDecimal(searchBook.price, 0, 'COMMA', 0, 'POINT')}"></span> ￥</p>
+                            </div>
+                        </div>
+
+                        <div class="layout__right-action">
+                            <button class="btn__action-buy"  onclick="addCart()" >
+                                Mua ngay
+                            </button>
+
+                            <button onclick="addCart()" class="btn__action-add-cart">
+                                Thêm vào giỏ hàng
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="history__seen">
+            <div class="container">
+                <div class="history__seen-title">
+                    <h3>
+                        Sản phẩm đã xem
+                    </h3>
+                </div>
+
+                <div class="history__seen-container">
+                    <!-- list product, product is tag li -->
+                    <ul class="list__product">
+                        <li class="list__product-item" th:each = "item : ${bookViewed}">
+                            <div class="product__item-img">
+                                <a  th:href="@{/book/bookid(id = ${item.id})}">
+                                    <img th:src="@{http://localhost:9999/uploads/__${item.img}__}" alt="">
+                                </a>
+
+                                <div class="product__option-buy">
+                                    <a th:href="@{/cart/add(bookId=${item.id})}">
+                                        <div class="product__option-buy-container">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <a href="">
+                                    <div class="product__option-buy-container">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="product__item-about">
+                                <div class="product__item-about-head">
+                                    <div class="product__item-about-head-name">
+                                        <a  th:href="@{/book/bookid(id = ${item.id})}">
+                                            <span th:text="${item.name}"></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="product__item-about-body">
+                                    <div class="product__item-about-body-pricenew">
+<!--                                        <th:block th:each="entry:${priceList}" >-->
+<!--                                            <span th:if="${item.id == entry.key}" th:text="${entry.value}"></span>-->
+<!--                                        </th:block>-->
+                                        <p> <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span> ￥</p>
+                                    </div>
+
+                                </div>
+
+<!--                                <div class="product__item-sold">-->
+<!--                                    1000+ sản phẩm đã bán-->
+<!--                                </div>-->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+</body>
+
+<script  th:inline="javascript">
+    const buttonUpQuality = document.querySelector('.btn__up-quality');
+    const buttonDownQuality = document.querySelector('.btn__down-quality');
+    const price = document.querySelector('.layout__right-price-content');
+    const quality = document.querySelector('.input-quality');
+    const listImgDemo = document.querySelectorAll('.list__image-sub-item');
+    const imgMain = document.querySelector('.img__product img');
+
+    buttonUpQuality.addEventListener('click', () => {
+        let qualityValue = parseInt(quality.value);
+        qualityValue += 1;
+        quality.setAttribute('value', qualityValue);
+        price.textContent = (qualityValue * price.getAttribute('data-price')).toLocaleString() + " ￥";
+    })
+
+    buttonDownQuality.addEventListener('click', () => {
+        let qualityValue = parseInt(quality.value);
+        if (qualityValue > 1) {
+            qualityValue -= 1;
+            quality.setAttribute('value', qualityValue);
+            price.textContent = (qualityValue * price.getAttribute('data-price')).toLocaleString() + " ￥";
+        } else {
+            console.log(1111);
+            }
+        })
+
+    listImgDemo.forEach((item, index) => {
+        item.addEventListener('click', () => {
+
+            listImgDemo.forEach(item => {
+                item.classList.remove('active')
+            })
+            const srcImgDemo = item.querySelector('img').getAttribute('src');
+            console.log(srcImgDemo);
+            imgMain.setAttribute('src', srcImgDemo);
+            item.classList.add('active');
+        })
+
+    })
+    function  addCart(){
+        const idbook = [[${searchBook.id}]]
+        const quantity =document.querySelector('.input-quality').value;
+        window.location.href = `http://localhost:9999/cart/add?bookId=${idbook}&quantity=${quantity}`
+
+    }
+
+</script>
+
+<script th:src="@{/js/header-overlay.js}"></script>
+</html>

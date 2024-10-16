@@ -1,0 +1,22 @@
+.scroll-top {
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    z-index: 9999;
+    cursor: pointer;
+    font-size: 4rem;
+    display: none;
+    animation: animationScrollTop 1s linear;
+}
+
+@keyframes animationScrollTop {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='info')}">
+
+</head>
+
+<body>
+<!-- message_header -->
+<th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+
+<!--<header>-->
+<!--        <div class="container">-->
+<!--            <div class="header__container">-->
+<!--                &lt;!&ndash; logo header &ndash;&gt;-->
+<!--                <div class="header__container-logo">-->
+<!--                    <a href="index.html">-->
+<!--                        <img src="images/logo-no-background.png" alt="">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; end logo header &ndash;&gt;-->
+
+<!--                &lt;!&ndash; navbar_header &ndash;&gt;-->
+<!--                <ul class="header__container-nav">-->
+<!--                    <li>-->
+<!--                        <a href="index.html">-->
+<!--                            trang chủ-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="" class="flex-center">-->
+<!--                            sản phẩm <i class="fa-solid fa-angle-down"></i>-->
+<!--                        </a>-->
+
+<!--                        <div class="sub_menu">-->
+<!--                            <ul>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="products.html">-->
+<!--                                        sách kinh tế-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="" class="text-sale">-->
+<!--                            sale-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            hàng mới về-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            chính sách-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            cửa hàng-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            về chúng tôi-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                &lt;!&ndash; end navbar_header &ndash;&gt;-->
+
+<!--                &lt;!&ndash; option user &ndash;&gt;-->
+<!--                <ul class="header__container-option">-->
+<!--                    <li class="option__user search">-->
+<!--                        <i class="fa-solid fa-magnifying-glass"></i>-->
+<!--                    </li>-->
+
+<!--                    <li class="option__user user">-->
+<!--                        <i class="fa-regular fa-user"></i>-->
+<!--                        <div class="option__user-sub account">-->
+<!--                            <ul class="option__user-sub-list">-->
+<!--                                <li class="option__user-sub-list-item">-->
+<!--                                    <a href="login.html">-->
+<!--                                        tài khoản-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="option__user-sub-list-item">-->
+<!--                                    <a href="">-->
+<!--                                        yêu thích-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="option__user-sub-list-item">-->
+<!--                                    <a href="">-->
+<!--                                        giỏ hàng-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="option__user-sub-list-item">-->
+<!--                                    <a href="register.html">-->
+<!--                                        đăng xuất-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+<!--                    <li class="option__user like">-->
+<!--                        <i class="fa-regular fa-heart"></i>-->
+<!--                    </li>-->
+
+<!--                    <li class="option__user cart">-->
+<!--                        <i class="fa-solid fa-bag-shopping"></i>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                &lt;!&ndash; end option user &ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </header>-->
+
+    <main>
+        <div class="wrapper">
+            <section class="container__info-developer">
+                <div class="layout-left">
+                    <section class="info__developer">
+                        <div class="info__develop-avatar">
+                            <img th:src="@{/images/nghien.jpg}"
+                                alt="">
+                        </div>
+
+                        <div class="info__develop-name">
+                           Hùng
+                        </div>
+
+                        <div class="info__develop-role">
+                            <ul class="list__role">
+                                <li class="list__role-item">
+                                    Back-end Deweloper
+                                </li>
+
+                                <li class="list__role-item">
+                                    Ui/UX Designer
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="layout-left-content">
+                        <div class="info__develop-self">
+                            <div class="info__develop-about">
+                                <div class="about-title">
+                                    Residence:
+                                </div>
+
+                                <div class="about-value">
+                                    Canada
+                                </div>
+                            </div>
+
+                            <div class="info__develop-about">
+                                <div class="about-title">
+                                    City:
+                                </div>
+
+                                <div class="about-value">
+                                    Toronto
+                                </div>
+                            </div>
+
+                            <div class="info__develop-about">
+                                <div class="about-title">
+                                    Age:
+                                </div>
+
+                                <div class="about-value">
+                                    20
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info__develop-language">
+                            <ul class="list__laguage">
+                                <li class="list__laguage-item">
+                                    <div class="language__item-circle">
+                                        <div class="art-lang-skills-item">
+                                            <div id="circleprog1-3" data-type="circles" data-value="80"
+                                                class="art-cirkle-progress art-skills-progress"
+                                                style="position: relative;"><svg viewBox="0 0 100 100"
+                                                    style="display: block; width: 100%;">
+                                                    <path
+                                                        d="M 50,50 m 0,-46.5 a 46.5,46.5 0 1 1 0,93 a 46.5,46.5 0 1 1 0,-93"
+                                                        stroke="#ccc" stroke-width="7" fill-opacity="0"></path>
+                                                    <path
+                                                        d="M 50,50 m 0,-46.5 a 46.5,46.5 0 1 1 0,93 a 46.5,46.5 0 1 1 0,-93"
+                                                        stroke="#f46258" stroke-width="7" fill-opacity="0" id="stroke-1"
+                                                        style="stroke-dasharray: 300, 292.273; stroke-dashoffset: 90;">
+                                                    </path>
+                                                </svg>
+                                                <div class="progressbar-text"
+                                                    style="position: absolute; left: 50%; top: 50%; padding: 0px; margin: 0px; transform: translate(-50%, -50%); color: rgb(85, 85, 85);">
+                                                    70</div>
+                                            </div>
+                                            <div class="language__item-name">
+                                                English
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="list__laguage-item">
+                                    <div class="language__item-circle">
+                                        <div class="art-lang-skills-item">
+                                            <div id="circleprog1-3" data-type="circles" data-value="70"
+                                                class="art-cirkle-progress art-skills-progress"
+                                                style="position: relative;"><svg viewBox="0 0 100 100"
+                                                    style="display: block; width: 100%;">
+                                                    <path
+                                                        d="M 50,50 m 0,-46.5 a 46.5,46.5 0 1 1 0,93 a 46.5,46.5 0 1 1 0,-93"
+                                                        stroke="#ccc" stroke-width="7" fill-opacity="0"></path>
+                                                    <path
+                                                        d="M 50,50 m 0,-46.5 a 46.5,46.5 0 1 1 0,93 a 46.5,46.5 0 1 1 0,-93"
+                                                        stroke="#f46258" stroke-width="7" fill-opacity="0" id="stroke-2"
+                                                        style="stroke-dasharray: 292.273, 292.273; stroke-dashoffset: 87.682;">
+                                                    </path>
+                                                </svg>
+                                                <div class="progressbar-text"
+                                                    style="position: absolute; left: 50%; top: 50%; padding: 0px; margin: 0px; transform: translate(-50%, -50%); color: rgb(85, 85, 85);">
+                                                    70</div>
+                                            </div>
+                                            <div class="language__item-name">
+                                                English
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="list__laguage-item">
+                                    <div class="language__item-circle">
+                                        <div class="art-lang-skills-item">
+                                            <div id="circleprog1-3" data-type="circles" data-value="70"
+                                                class="art-cirkle-progress art-skills-progress"
+                                                style="position: relative;"><svg viewBox="0 0 100 100"
+                                                    style="display: block; width: 100%;">
+                                                    <path
+                                                        d="M 50,50 m 0,-46.5 a 46.5,46.5 0 1 1 0,93 a 46.5,46.5 0 1 1 0,-93"
+                                                        stroke="#ccc" stroke-width="7" fill-opacity="0"></path>
+                                                    <path
+                                                        d="M 50,50 m 0,-46.5 a 46.5,46.5 0 1 1 0,93 a 46.5,46.5 0 1 1 0,-93"
+                                                        stroke="#f46258" stroke-width="7" fill-opacity="0" id="stroke-3"
+                                                        style="stroke-dasharray: 292.273, 292.273; stroke-dashoffset: 87.682;">
+                                                    </path>
+                                                </svg>
+                                                <div class="progressbar-text"
+                                                    style="position: absolute; left: 50%; top: 50%; padding: 0px; margin: 0px; transform: translate(-50%, -50%); color: rgb(85, 85, 85);">
+                                                    70</div>
+                                            </div>
+                                            <div class="language__item-name">
+                                                English
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="info__develop-skill">
+                            <ul class="list__skill">
+
+                            </ul>
+                        </div>
+                    </section>
+
+
+                </div>
+
+                <div class="layout-right">
+                    <div class="banner-line">
+                    </div>
+                    <div class="banner">
+                        <img th:src="@{/images/Banner.png}" alt="">
+                        <div class="avatar-developer">
+                            <img src="https://arter.bslthemes.com/light/wp-content/uploads/sites/2/2020/09/face-2.png"
+                                alt="">
+                        </div>
+                        <div class="banner-about">
+                            <div class="banner-about-title">
+                                Discover my Amazing
+                                Art Space !
+                            </div>
+
+                            <div class="banner-about-code">
+                                <span class="span-code">
+                                    <span>
+                                        << /span>code<span>></span>
+                                    </span>
+
+                                    <span class="text-code">I build automation tools.</span>
+
+                                    <span class="span-code">
+                                        <span>
+                                            << /span><span>/</span>code<span>></span>
+                                        </span>
+                            </div>
+
+                            <button class="button-explore">explore now</button>
+                        </div>
+                    </div>
+
+                    <section class="experience">
+                        <ul class="list__experience">
+                            <li class="list__experience-item">
+                                <div class="experience__item-number">
+                                    10 +
+                                </div>
+
+                                <div class="experience__item-text">
+                                    Years Experience
+                                </div>
+                            </li>
+                            <li class="list__experience-item">
+                                <div class="experience__item-number">
+                                    10 +
+                                </div>
+
+                                <div class="experience__item-text">
+                                    Years Experience
+                                </div>
+                            </li>
+                            <li class="list__experience-item">
+                                <div class="experience__item-number">
+                                    10 +
+                                </div>
+
+                                <div class="experience__item-text">
+                                    Years Experience
+                                </div>
+                            </li>
+                            <li class="list__experience-item">
+                                <div class="experience__item-number">
+                                    10 +
+                                </div>
+
+                                <div class="experience__item-text">
+                                    Years Experience
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="service">
+                        <div class="service-title">
+                            My Services
+                        </div>
+
+                        <ul class="list__sevices">
+                            <li class="list-services-item">
+                                <div class="services__item-title">
+                                    Web Development
+                                </div>
+
+                                <div class="services__item-content">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus esse commodi
+                                    deserunt vitae, vero quasi! Veniam quaerat tenetur pariatur doloribus.
+                                </div>
+
+                                <div class="services__item-next">
+                                    order now <i class="fa-solid fa-angle-right"></i>
+                                </div>
+                            </li>
+                            <li class="list-services-item">
+                                <div class="services__item-title">
+                                    Web Development
+                                </div>
+
+                                <div class="services__item-content">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus esse commodi
+                                    deserunt vitae, vero quasi! Veniam quaerat tenetur pariatur doloribus.
+                                </div>
+
+                                <div class="services__item-next">
+                                    order now <i class="fa-solid fa-angle-right"></i>
+                                </div>
+                            </li>
+                            <li class="list-services-item">
+                                <div class="services__item-title">
+                                    Web Development
+                                </div>
+
+                                <div class="services__item-content">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus esse commodi
+                                    deserunt vitae, vero quasi! Veniam quaerat tenetur pariatur doloribus.
+                                </div>
+
+                                <div class="services__item-next">
+                                    order now <i class="fa-solid fa-angle-right"></i>
+                                </div>
+                            </li>
+                            <li class="list-services-item">
+                                <div class="services__item-title">
+                                    Web Development
+                                </div>
+
+                                <div class="services__item-content">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus esse commodi
+                                    deserunt vitae, vero quasi! Veniam quaerat tenetur pariatur doloribus.
+                                </div>
+
+                                <div class="services__item-next">
+                                    order now <i class="fa-solid fa-angle-right"></i>
+                                </div>
+                            </li>
+                            <li class="list-services-item">
+                                <div class="services__item-title">
+                                    Web Development
+                                </div>
+
+                                <div class="services__item-content">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus esse commodi
+                                    deserunt vitae, vero quasi! Veniam quaerat tenetur pariatur doloribus.
+                                </div>
+
+                                <div class="services__item-next">
+                                    order now <i class="fa-solid fa-angle-right"></i>
+                                </div>
+                            </li>
+                            <li class="list-services-item">
+                                <div class="services__item-title">
+                                    Web Development
+                                </div>
+
+                                <div class="services__item-content">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus esse commodi
+                                    deserunt vitae, vero quasi! Veniam quaerat tenetur pariatur doloribus.
+                                </div>
+
+                                <div class="services__item-next">
+                                    order now <i class="fa-solid fa-angle-right"></i>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="contact">
+                        <div class="contact-title">
+                            Contact Me
+                        </div>
+
+                        <ul class="list__contact">
+                            <li class="list__contact-item">
+                                <div class="contact__item-logo ">
+                                    <i class="fa-brands fa-facebook" style="color: #005eff;"></i>
+                                </div>
+
+                                <div class="contact__item-about">
+                                    Bạn có thể liên hệ với tôi qua Facebook
+                                </div>
+
+                                <div class="contact__item-next">
+                                    <a href="https://www.facebook.com/Nguyenvan.h2210">
+                                        Liên hệ <i class="fa-solid fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li class="list__contact-item">
+                                <div class="contact__item-logo">
+                                    <i class="fa-brands fa-twitter" style="color: #619bff;"></i>
+                                </div>
+
+                                <div class="contact__item-about">
+                                    Bạn có thể liên hệ với tôi qua Twitter
+                                </div>
+
+                                <div class="contact__item-next">
+                                    <a>
+                                        Liên hệ <i class="fa-solid fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li class="list__contact-item">
+                                <div class="contact__item-logo">
+                                    <i class="fa-brands fa-linkedin" style="color: #003ea8;"></i>
+                                </div>
+
+                                <div class="contact__item-about">
+                                    Bạn có thể liên hệ với tôi qua Linkedin
+                                </div>
+
+                                <div class="contact__item-next">
+                                    <a>
+                                        Liên hệ <i class="fa-solid fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li class="list__contact-item">
+                                <div class="contact__item-logo">
+                                    <i class="fa-brands fa-github"></i>
+                                </div>
+
+                                <div class="contact__item-about">
+                                    Bạn có thể liên hệ với tôi qua Github
+                                </div>
+
+                                <div class="contact__item-next">
+                                    <a>
+                                        Liên hệ <i class="fa-solid fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="footer">
+                        <div class="">
+                            © 2023 All Rights Reserved.
+                        </div>
+
+                        <div class="">
+                            Email: admin@bslthemes.com
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+</body>
+
+<script>
+    const listSkill = document.querySelector(".list__skill");
+
+    const language1 = 50;
+    const language2 = 70;
+    const language3 = 90;
+
+    const skill = [
+        {
+            name: "HTML",
+            value: 90
+        },
+        {
+            name: "HTML",
+            value: 90
+        },
+        {
+            name: "HTML",
+            value: 90
+        },
+        {
+            name: " CSS",
+            value: 80
+        }
+    ]
+
+
+    updateProgress(language1, "stroke-1");
+    updateProgress(language2, "stroke-2");
+    updateProgress(language3, "stroke-3");
+
+    function updateProgress(value, id) {
+        var dasharray = 292.273; // Replace with the appropriate value
+        var dashoffset = (100 - value) / 100 * dasharray;
+
+        document.getElementById(id).style.strokeDasharray = dasharray + ", " + dasharray;
+        document.getElementById(id).style.strokeDashoffset = dashoffset;
+    }
+
+    const html = skill.map((skill) => {
+        return `<li class="list__skill-item">
+                                    <div class="skill__item-name">
+                                        <div class="skill__item-name-title">
+                                            ${skill.name}
+                                        </div>
+
+                                        <div class="skill__item-name-value">
+                                            ${skill.value}%
+                                        </div>
+                                    </div>
+
+                                    <div class="skill__item-line">
+                                        <div class="skill__item-line-default"></div>
+                                        <div class="skill__item-line-value codeSkil-3" style="width: ${skill.value}%;"></div>
+                                    </div>
+                                </li>`
+    })
+
+    listSkill.innerHTML = html.join("");
+
+
+</script>
+
+</html>

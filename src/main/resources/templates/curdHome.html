@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Management')}">
+
+</head>
+
+
+<body>
+    <!-- header -->
+    <th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+    <!-- end header -->
+
+    <section class="location">
+        <div class="container">
+            <div class="location__container">
+                <div class="location__history">
+                    <a href="">
+                        Trang chủ
+                    </a>
+                </div>
+                <div class="">/</div>
+
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="layout__container">
+                    <div class="layout__container-head">
+                        <div class="layout__container-head-title">
+                            <h3>
+                                CURD
+                            </h3>
+                        </div>
+
+<!--                        <div class="layout__container-head-filter">-->
+<!--                            <div class="layout__container-head-filter-icon">Sort <i class="fa-solid fa-angle-down"></i>-->
+<!--                            </div>-->
+<!--                            <div class="layout__container-head-filter-option">-->
+<!--                                <ul>-->
+<!--                                    <li>Từ thấp đến lớn</li>-->
+<!--                                    <li>Từ lớn đến thấp</li>-->
+<!--                                    <li>Theo giá tiền</li>-->
+<!--                                    <li>Theo ngày xuất bản</li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                    <div class="layout__container-body">
+                        <th:block th:insert="~{/common/fragument.html :: body_left_admin}"></th:block>
+
+
+                        <div class="layout__container-body-right">
+                            <h1 class="h1" >Hello Administration</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+</body>
+
+<script th:src="@{/js/header-overlay.js}"></script>
+<script>
+    const selectForm = document.querySelector('.layout__container-body-right-title');
+    const selectCategory = document.querySelector('.filter__category-head');
+
+    selectCategory.addEventListener('click', () => {
+        const parentElement = selectCategory.parentElement;
+        const icon = selectCategory.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const list = parentElement.querySelector('.filter__category-list');
+        list.style.display = list.style.display == 'none' ? 'block' : 'none';
+    
+    })
+
+    selectForm.addEventListener('click', () => {
+        const parentElement = selectForm.parentElement;
+        const icon = selectForm.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const form = parentElement.querySelector('form');
+        form.style.display = form.style.display == 'none' ? 'flex' : 'none';
+    })
+</script>
+
+</html>

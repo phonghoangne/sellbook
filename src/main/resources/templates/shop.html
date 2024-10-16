@@ -1,0 +1,324 @@
+<!DOCTYPE html >
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Shop')}">
+
+</head>
+
+<body>
+    <!-- message_header -->
+    <th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+    <!-- end header -->
+
+    <section class="location">
+        <div class="container">
+            <div class="location__container">
+                <div class="location__history">
+                    <a th:href="@{/home/view}">
+                        Trang chủ
+                    </a>
+                </div>
+                <div class="">/</div>
+
+                <div class="location__now">
+                    <th:block th:if="${category } != null">
+                        <p th:text="${category.name}"></p>
+                    </th:block>
+                    <th:block th:unless="${category } != null">
+                        <p > Sản phẩm</p>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="banner__small">
+        <div class="container">
+            <div class="banner__small-container">
+                <img th:src="@{/images/three_index_1.webp}" alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- main -->
+    <main>
+        <section class="main">
+            <div class="container">
+
+                <div class="layout__container">
+                    <div class="layout__container-head">
+                        <div class="layout__container-head-title">
+                            <h3 th:if="${category != null}" th:text="${category.name}">
+                                Sách kinh tế
+                            </h3>
+                        </div>
+
+                    </div>
+                    <div class="layout__container-body">
+                        <div class="layout__container-body-left">
+                            <div class="filter__category">
+                                <div class="filter__category-title">
+                                    <h3>
+                                        thể loại
+                                    </h3>
+                                </div>
+
+                                <ul class="filter__category-list">
+                                    <li class="filter__category-list-item" th:each=" item : ${categoryList}">
+                                        <a th:if="${category} == null " th:href="@{/book/category(categoryId = ${item.id})}" th:text="${item.name}" ></a>
+                                      <a th:unless="${category} == null " th:href="@{/book/category(categoryId = ${item.id})}" th:text="${item.name}" th:classappend="${category.id == item.id}?'active':'' "></a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="layout__container-body-right">
+                            <h2 th:if="${resultSearch}" th:text="${resultSearch}"></h2>
+                            <!-- list product, product is tag li -->
+                            <ul class="list__product">
+                                <li class="list__product-item" th:each = "item : ${listBook}">
+                                    <div class="product__item-img">
+                                        <a  th:href="@{/book/bookid(id = ${item.id})}">
+                                            <img th:src="@{http://localhost:9999/uploads/__${item.img}__}" alt="">
+                                        </a>
+
+                                        <div class="product__option-buy">
+                                            <a th:href="@{/cart/add(bookId=${item.id})}">
+                                                <div class="product__option-buy-container">
+                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <a href="">
+                                            <div class="product__option-buy-container">
+                                                <i class="fa-solid fa-heart"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="product__item-about">
+                                        <div class="product__item-about-head">
+                                            <div class="product__item-about-head-name">
+                                                <a  th:href="@{/book/bookid(id = ${item.id})}">
+                                                    <span th:text="${item.name}"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="product__item-about-body">
+                                            <div class="product__item-about-body-pricenew">
+                                                <p> <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span> ￥</p>
+                                            </div>
+
+                                        </div>
+
+<!--                                        <div class="product__item-sold">-->
+<!--                                            1000+ sản phẩm đã bán-->
+<!--                                        </div>-->
+                                    </div>
+                                </li>
+                            </ul>
+
+                           <th:block th:if="${totalPages > 1}">
+                               <div class="pagination__container">
+                                   <div class="pagination">
+                                       <ul> <!--pages or li are comes from javascript --> </ul>
+                                   </div>
+                               </div>
+                           </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="history__seen">
+            <div class="container">
+                <div class="history__seen-title">
+                    <h3>
+                        Sản phẩm đã xem
+                    </h3>
+                </div>
+
+                <div class="history__seen-container">
+                    <!-- list product, product is tag li -->
+                    <ul class="list__product">
+                        <li class="list__product-item" th:each = "item : ${bookViewed}">
+                            <div class="product__item-img">
+                                <a  th:href="@{/book/bookid(id = ${item.id})}">
+                                    <img th:src="@{http://localhost:9999/uploads/__${item.img}__}" alt="">
+                                </a>
+
+                                <div class="product__option-buy">
+                                    <a th:href="@{/cart/add(bookId=${item.id})}">
+                                        <div class="product__option-buy-container">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <a href="">
+                                    <div class="product__option-buy-container">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="product__item-about">
+                                <div class="product__item-about-head">
+                                    <div class="product__item-about-head-name">
+                                        <a  th:href="@{/book/bookid(id = ${item.id})}">
+                                            <span th:text="${item.name}"></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="product__item-about-body">
+                                    <div class="product__item-about-body-pricenew">
+                                        <th:block th:each="entry:${priceList}" >
+                                            <span th:if="${item.id == entry.key}" th:text="${entry.value}"></span>
+                                        </th:block>
+                                    </div>
+
+                                </div>
+
+<!--                                <div class="product__item-sold">-->
+<!--                                    1000+ sản phẩm đã bán-->
+<!--                                </div>-->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- end main -->
+
+    <!-- footer -->
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+    <!-- end footer -->
+</body>
+<script th:src="@{/js/header-overlay.js}"></script>
+<script th:inline="javascript">
+    // js for pagination
+    const element = document.querySelector(".pagination ul");
+    let totalPages = [[${totalPages}]];
+    let currentPage = [[${currentPage}]];  // Đặt giá trị page bắt đầu từ 0
+    let categoryId = [[${categoryId}]];
+    element.innerHTML = createPagination(totalPages, currentPage);
+
+    function createPagination(totalPages, currentPage) {
+        let liTag = '';
+        let active;
+        let beforePage = currentPage - 1;
+        let afterPage = currentPage + 1;
+
+        if (currentPage > 0) {
+            liTag += `<li class="btn prev" onclick="changePage(${currentPage - 1})"><span><i class="fas fa-angle-left"></i> Prev</span></li>`;
+        }
+
+        if (currentPage > 2) {
+            liTag += `<li class="numb" onclick="changePage(0)"><span>1</span></li>`;
+            if (currentPage > 3) {
+                liTag += `<li class="dots"><span>...</span></li>`;
+            }
+        }
+
+        for (let plength = beforePage; plength <= afterPage; plength++) {
+            if (plength < 0 || plength >= totalPages) {
+                continue;
+            }
+
+            if (plength == currentPage) {
+                active = "active";
+            } else {
+                active = "";
+            }
+
+            liTag += `<li class="numb ${active}" onclick="changePage(${plength})"><span>${plength + 1}</span></li>`;
+        }
+
+        if (currentPage < totalPages - 4) {
+            liTag += `<li class="dots"><span>...</span></li>`;
+        }
+
+        if (currentPage < totalPages - 1) {
+            liTag += `<li class="numb" onclick="changePage(${totalPages - 1})"><span>${totalPages}</span></li>`;
+            liTag += `<li class="btn next" onclick="changePage(${currentPage + 1})"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+        }
+
+        element.innerHTML = liTag;
+        return liTag;
+    }
+
+    function changePage(newPage) {
+        if (newPage >= 0) {
+            if (categoryId >= 1) {
+                window.location.href = `http://localhost:9999/book/category?page=${newPage}&categoryId=${categoryId}`;
+            } else {
+                window.location.href = `http://localhost:9999/book/shop?page=${newPage}`;
+            }
+        }
+    }
+</script>
+
+
+<!--<script th:inline="javascript">-->
+<!--    // js for pagination-->
+<!--    const element = document.querySelector(".pagination ul");-->
+<!--    let totalPages = [[${totalPages}]];-->
+<!--    let page = [[${currentPage}]];-->
+
+<!--    element.innerHTML = createPagination(totalPages, page);-->
+
+<!--    function createPagination(totalPages, page) {-->
+<!--        let liTag = '';-->
+<!--        let active;-->
+<!--        let beforePage = page - 1;-->
+<!--        let afterPage = page + 1;-->
+<!--        if (page > 1) {-->
+<!--            liTag += `<li class="btn prev" onclick="createPagination(totalPages, ${page - 1})"><span><i class="fas fa-angle-left"></i> Prev</span></li>`;-->
+<!--        }-->
+<!--        if (page == totalPages) {-->
+<!--            beforePage = beforePage - 2;-->
+<!--        } else if (page == totalPages - 1) {-->
+<!--            beforePage = beforePage - 1;-->
+<!--        }-->
+<!--        if (page == 1) {-->
+<!--            afterPage = afterPage + 2;-->
+<!--        } else if (page == 2) {-->
+<!--            afterPage = afterPage + 1;-->
+<!--        }-->
+
+<!--        for (var plength = beforePage; plength <= afterPage; plength++) {-->
+<!--            if (plength > totalPages) {-->
+<!--                continue;-->
+<!--            }-->
+<!--            if (plength == 0) {-->
+<!--                plength = plength + 1;-->
+<!--            }-->
+<!--            if (page == plength) {-->
+<!--                active = "active";-->
+<!--            } else {-->
+<!--                active = "";-->
+<!--            }-->
+<!--            liTag += `<li class="numb ${active}" onclick="createPagination(totalPages, ${plength})"><span>${plength}</span></li>`;-->
+<!--        }-->
+
+<!--        if (page < totalPages - 1) {-->
+<!--            if (page < totalPages - 2) {-->
+<!--                liTag += `<li class="dots"><span>...</span></li>`;-->
+<!--            }-->
+
+<!--        }-->
+
+<!--        if (page < totalPages) {-->
+<!--            liTag += `<li class="btn next" onclick="createPagination(totalPages, ${page + 1})"><span>Next <i class="fas fa-angle-right"></i></span></li>`;-->
+<!--        }-->
+<!--        element.innerHTML = liTag;-->
+<!--        return liTag;-->
+<!--    }-->
+<!--</script>-->
+
+</html>

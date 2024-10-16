@@ -1,0 +1,249 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Mulish", sans-serif;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.container {
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.text-sale {
+  color: #FB2249 !important;
+}
+
+.flex-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+body {
+  position: relative;
+}
+
+.alert__container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  bottom: 1.5rem;
+  right: 2rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  z-index: 9999;
+}
+.alert__container .alert__container-item {
+  padding: 1.2rem;
+  border-radius: 1rem;
+  animation: alertAnimation alternate 0.3s ease-in-out;
+}
+.alert__container .alert__container-item.info {
+  background-color: rgba(162, 205, 245, 0.808);
+  color: rgb(0, 49, 94);
+}
+.alert__container .alert__container-item.danger {
+  background-color: rgba(247, 170, 163, 0.862745098);
+  color: rgb(126, 1, 1);
+}
+.alert__container .alert__container-item.success {
+  background-color: rgba(117, 255, 209, 0.6352941176);
+  color: rgb(1, 75, 50);
+}
+.alert__container .alert__container-item.warning {
+  background-color: rgba(245, 255, 112, 0.808);
+  color: rgba(108, 114, 3, 0.993);
+}
+.alert__container .alert__container-item.dark {
+  background-color: rgba(27, 60, 90, 0.493);
+  color: rgb(1, 21, 41);
+}
+.alert__container .alert__container-item .alert__content {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+.alert__container .alert__container-item .alert__content .alert__content-title {
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+.alert__container.top {
+  top: 6.5rem !important;
+}
+.alert__container.bottom {
+  bottom: 1.5rem;
+}
+.alert__container.right {
+  right: 1.5rem;
+}
+.alert__container.left {
+  left: 1.5rem;
+}
+
+main {
+  position: relative;
+}
+
+@keyframes alertAnimation {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}/*# sourceMappingURL=alert.css.map */

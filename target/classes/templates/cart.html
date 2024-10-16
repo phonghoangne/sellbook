@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Cart')}">
+
+</head>
+
+<body>
+    <!-- message_header -->
+    <th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+
+    <!-- end header -->
+
+
+    <section class="location">
+        <div class="container">
+            <div class="location__container">
+                <div class="location__history">
+                    <a href="">
+                        Trang chủ
+                    </a>
+                </div>
+                <div class="">/</div>
+
+                <div class="location__now">
+                    <a href="">
+                        Giỏ hàng
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section class="cart">
+            <div class="container">
+                <div class="cart__container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="table__product">sản phẩm</th>
+                                <th class="table__price">giá</th>
+                                <th class="table__quantity">số lượng</th>
+                                <th class="table__total">tổng</th>
+                                <th class="table__action">action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="item : ${cartList}" th:attr="data-cart-item-id=${item.book.id}">
+                                <td>
+                                    <div class="table__product-container">
+                                        <div class="table__product-img">
+                                            <img th:src="@{http://localhost:9999/uploads/__${item.book.getImg()}__}" alt="">
+                                        </div>
+
+                                        <div class="table__product-content">
+                                            <div class="table__product-content-name">
+                                                <p th:text="${item.book.getName()}">
+                                                    Sách Kinh Tế
+                                                </p>
+                                            </div>
+
+                                            <div class="table__product-content-rate">
+                                                <ul class="list__star">
+                                                    <li class="list__star-item">
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </li>
+                                                    <li class="list__star-item">
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </li>
+                                                    <li class="list__star-item">
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </li>
+                                                    <li class="list__star-item">
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </li>
+                                                    <li class="list__star-item">
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- price -->
+                                <td class="col__price">
+                                    <div class="product__price" th:attr="data-price= ${item.book.price}">
+                                      <span   th:text="${#numbers.formatDecimal(item.book.price, 0, 'COMMA', 0, 'POINT')}"></span>￥
+                                    </div>
+                                </td>
+
+                                <!-- quality -->
+                                <td class="product__quality">
+                                    <div class="quality__container">
+                                        <div class="quality__container-btn">
+                                            <button  class="quality__container-btn-minus quality__down" th:attr="data-value=${item.book.id}">
+                                                <i class="fa-solid fa-minus" ></i>
+                                            </button>
+
+                                            <input type="text" th:value="${item.quantity}" class="quality__container-btn-input">
+
+                                            <button  class="quality__container-btn-plus quality__up"  th:attr="data-value=${item.book.id}">
+                                                <i class="fa-solid fa-plus" ></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- total -->
+                                <td class="product__total" >
+<!--                                    <th:block th:each="entry:${priceTotalProduct}" >-->
+<!--                                        <span th:if="${item.book.getId() == entry.key}" th:text="${#numbers.formatDecimal(entry.value, 0, 'COMMA', 0, 'POINT')}"></span>￥-->
+<!--                                    </th:block>-->
+                                    <span   th:text="${#numbers.formatDecimal(item.book.price * item.quantity, 0, 'COMMA', 0, 'POINT')}"></span>￥
+                                </td>
+
+                                <!-- action -->
+                                <td class="product__action">
+                                    <button class="product__action-btn" th:onclick="removeCart(this)" th:attr="data-product-id=${item.book.id}">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="bill">
+            <div class="container">
+                <div class="bill__container">
+                    <div class="bill__container-add">
+                        <div class="bill__container-title">
+                            <h3>
+                                Mã giảm giá
+                            </h3>
+                        </div>
+                        <div class="bill__container-voucher">
+                            <input type="text" class="input-voucher" placeholder="Enter your coupon code">
+                            <button class="btn-voucher">
+                                Áp dụng
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bill__container-total">
+                        <div class="bill__container-total-title">
+                            <h3>
+                                Tổng giỏ hàng
+                            </h3>
+                        </div>
+
+                        <div class="bill__container-total-content">
+                            <div class="bill__container-total-content-item">
+                                <div class="bill__container-total-content-item-title">
+                                    Tạm tính
+                                </div>
+
+                                <div class="bill__container-total-content-item-price">
+                                    <span   th:text="${#numbers.formatDecimal(priceTotalCart, 0, 'COMMA', 0, 'POINT')}"></span>￥
+                                </div>
+                            </div>
+
+                            <div class="bill__container-total-content-item">
+                                <div class="bill__container-total-content-item-title">
+                                    Phí vận chuyển
+                                </div>
+
+                                <div class="bill__container-total-content-item-price">
+                                    0 ￥
+                                </div>
+                            </div>
+
+                            <div class="bill__container-total-content-item">
+                                <div class="bill__container-total-content-item-title">
+                                    Tổng cộng
+                                </div>
+
+                                <div class="bill__container-total-content-item-price">
+                                    <span   th:text="${#numbers.formatDecimal(priceTotalCart, 0, 'COMMA', 0, 'POINT')}"></span>￥
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bill__container-total-btn">
+                            <button class="btn__order" onclick="Payment()">
+                                Đặt hàng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="history__seen">
+            <div class="container">
+                <div class="history__seen-title">
+                    <h3>
+                        Sản phẩm đã xem
+                    </h3>
+                </div>
+
+                <div class="history__seen-container">
+                    <ul class="list__product">
+                        <li class="list__product-item" th:each = "item : ${bookViewed}">
+                            <div class="product__item-img">
+                                <a  th:href="@{/book/bookid(id = ${item.id})}">
+                                    <img th:src="@{http://localhost:9999/uploads/__${item.img}__}" alt="">
+                                </a>
+
+                                <div class="product__option-buy">
+                                    <a th:href="@{/cart/add(bookId=${item.id})}">
+                                        <div class="product__option-buy-container">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <a href="">
+                                    <div class="product__option-buy-container">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="product__item-about">
+                                <div class="product__item-about-head">
+                                    <div class="product__item-about-head-name">
+                                        <a  th:href="@{/book/bookid(id = ${item.id})}">
+                                            <span th:text="${item.name}"></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="product__item-about-body">
+                                    <div class="product__item-about-body-pricenew">
+                                        <!--                                        <th:block th:each="entry:${priceList}" >-->
+                                        <!--                                            <span th:if="${item.id == entry.key}" th:text="${entry.value}"></span>-->
+                                        <!--                                        </th:block>-->
+                                        <p> <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span> ￥</p>
+                                    </div>
+
+                                </div>
+
+<!--                                <div class="product__item-sold">-->
+<!--                                    1000+ sản phẩm đã bán-->
+<!--                                </div>-->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+</body>
+
+<script th:src="@{/js/header-overlay.js}"></script>
+<script>
+    const buttonDown = document.querySelectorAll('.quality__down');
+    const buttonUp = document.querySelectorAll('.quality__up');
+
+    buttonDown.forEach(button => {
+        button.addEventListener('click', () => {
+            const parentElement = button.parentElement.parentElement.parentElement.parentElement;
+            const totalPrice = parentElement.querySelector('.product__total');
+            const priceProduct = parentElement.querySelector('.product__price');
+            const input = button.parentElement.querySelector('.quality__container-btn-input');
+            let value = parseInt(input.value);
+            if (value > 1) {
+                value -= 1;
+                console.log(value);
+                input.value = value;
+                const amount = value * priceProduct.getAttribute('data-price');
+                const formattedAmount = amount.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY'});
+                const formattedAmountWithoutCurrency = formattedAmount.replace('₫', '');
+
+
+
+                totalPrice.innerHTML = amount+'￥';
+                const idbook = button.getAttribute('data-value');
+                window.location.href = `http://localhost:9999/cart/add?bookId=${idbook}&quantity=${value}`
+            }
+        })
+    })
+
+    buttonUp.forEach(button => {
+        button.addEventListener('click', () => {
+            const parentElement = button.parentElement.parentElement.parentElement.parentElement;
+            const totalPrice = parentElement.querySelector('.product__total');
+            const priceProduct = parentElement.querySelector('.product__price');
+            const input = button.parentElement.querySelector('.quality__container-btn-input');
+            let value = parseFloat(input.value) + 1;
+            input.value = value;
+
+            const amount = value * priceProduct.getAttribute('data-price');
+            const formattedAmount = amount.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
+            // const formattedAmountWithoutCurrency = formattedAmount.replace('₫', '');
+            //
+            totalPrice.innerHTML =   amount+'￥';
+
+            const idbook = button.getAttribute('data-value');
+            window.location.href = `http://localhost:9999/cart/add?bookId=${idbook}&quantity=${value}`
+        })
+    })
+
+    function Payment() {
+        // Thay đổi URL để chuyển hướng
+        window.location.href = "http://localhost:9999/cart/pay"; // Thay thế bằng URL bạn muốn chuyển hướng đến
+    }
+    function removeCart(button){
+        var bookId =button.getAttribute("data-product-id");
+        var rowToRemove = $('tr[data-cart-item-id="' + bookId + '"]');
+        rowToRemove.remove();
+        $.ajax({
+            type: 'POST', // or 'DELETE' if your backend supports it
+            url: '/cart/remove', // replace with your backend endpoint
+            data: { bookId: bookId },
+            success: function (response) {
+                // Handle success, maybe update the UI
+                console.log('Item removed successfully');
+                // Add logic to update the UI or reload the cart
+            },
+            error: function (error) {
+                console.error('Error removing item: ', error);
+            }
+        });
+    }
+
+
+    function  addCart(){
+        const idbook = document.querySelector('.quality__down').getAttribute('data-value');
+        const quantity =document.querySelector('.quality__container-btn-input').value;
+        console.log(quantity)
+        setTimeout(()=>{
+            window.location.href = `http://localhost:9999/cart/add?bookId=${idbook}&quantity=${quantity}`
+        },1000)
+        // window.location.href = `http://localhost:9999/cart/add?bookId=${idbook}&quantity=${quantity}`
+
+    }
+</script>
+
+</html>

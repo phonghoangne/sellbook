@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Management')}">
+
+</head>
+
+
+<body>
+    <!-- header -->
+    <th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+    <!-- end header -->
+
+    <section class="location">
+        <div class="container">
+            <div class="location__container">
+                <div class="location__history">
+                    <a th:href="@{/admin}">
+                        Trang chủ
+                    </a>
+                </div>
+                <div class="">/</div>
+
+                <div class="location__now">
+                    <a th:href="@{/admin/account}">
+                       Management account
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="layout__container">
+                    <div class="layout__container-head">
+                        <div class="layout__container-head-title">
+                            <h3>
+                                CURD
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="layout__container-body">
+                        <th:block th:insert="~{/common/fragument.html :: body_left_admin}"></th:block>
+
+                        <div class="layout__container-body-right">
+                            <div class="layout__container-body-right-form">
+                                <div class="layout__container-body-right-title">
+                                    Form CURD
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <form action="/admin/account/add" method="post" th:object="${editAccount}">
+                                    <div class="alert__container top"  th:if="${success != null}">
+                                        <div class="alert__container-item success">
+                                            <div class="alert__content">
+                                                <div class="alert__content-title">
+                                                    <h2>Notification</h2>
+                                                </div>
+
+                                                <div class="alert__content-sub">
+                                                    <p th:text="${success}" >Change a few things up and try submitting again</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id">ID:</label>
+                                        <input type="text" id="id" name="id" th:field="*{id}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">username:</label>
+                                        <input type="text" id="username" name="username" th:field="*{username}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fullname">fullname:</label>
+                                        <input type="text" id="fullname" name="fullname" th:field="*{fullname}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">email:</label>
+                                        <input type="text" id="email" name="email" th:field="*{email}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">password:</label>
+                                        <input type="password" id="password" name="password" th:field="*{password}" th:value="*{password}">
+                                    </div>
+                                    <div class="login__container-form-item-pls">
+                                        <div class="login__container-form-gender">
+                                            <label for="">Giới tính</label>
+                                            <select name="gender" id="gender" th:field="*{gender}">
+                                                <option value="true">Nam</option>
+                                                <option value="false">Nữ</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="login__container-form-date">
+                                            <div class="login__container-form-item-birthday">
+                                                <div class="login__container-form-item-birthday-title">
+                                                    <label for="birthday">Ngày tháng năm sinh</label>
+                                                </div>
+
+                                                <div class="login__container-form-item-birthday-input">
+                                                    <input type="date" id="birthday" name="birthday" value="2021-09-30" th:field="*{birthDay}"
+                                                           min="1900-01-01" max="2021-12-31">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit">Thêm Account</button>
+                                </form>
+                            </div>
+
+                            <div class="layout__container-body-right-table">
+                                <table class="book-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Username</th>
+                                            <th>Fullname</th>
+                                            <th>Email</th>
+                                            <th>Gender</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="book-list">
+                                        <tr th:each=" item: ${accountList}">
+                                            <td th:text="${item.id}">1</td>
+                                            <td th:text="${item.username}">Tiểu thuyết A</td>
+                                            <td th:text="${item.fullname}">Tiểu thuyết A</td>
+                                            <td th:text="${item.email}">Tiểu thuyết A</td>
+                                            <td th:text="${item.gender == 0 ? 'Nam' : 'Nữ'}">Tiểu thuyết A</td>
+                                            <td>
+                                                <a class="action-button edit-button" th:href="@{/admin/account/edit(id=${item.id})}">Sửa</a>
+                                                <a class="action-button delete-button" th:href="@{/admin/account/remove(accountId = ${item.id})}">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <th:block th:if="${totalPages > 1}">
+                                    <div class="pagination__container">
+                                        <div class="pagination">
+                                            <ul> <!--pages or li are comes from javascript --> </ul>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                            <div id="book-modal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" id="close-button">&times;</span>
+                                    <h2>Thông Tin Sách</h2>
+                                    <form id="book-form">
+                                        <!-- Các trường nhập thông tin sách sẽ ở đây -->
+                                        <button type="button" id="save-button">Lưu</button>
+                                        <button type="button" id="cancel-button">Hủy</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+</body>
+
+<script th:src="@{/js/header-overlay.js}"></script>
+<script>
+    const selectForm = document.querySelector('.layout__container-body-right-title');
+    const selectCategory = document.querySelector('.filter__category-head');
+
+    selectCategory.addEventListener('click', () => {
+        const parentElement = selectCategory.parentElement;
+        const icon = selectCategory.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const list = parentElement.querySelector('.filter__category-list');
+        list.style.display = list.style.display == 'none' ? 'block' : 'none';
+    
+    })
+
+    selectForm.addEventListener('click', () => {
+        const parentElement = selectForm.parentElement;
+        const icon = selectForm.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const form = parentElement.querySelector('form');
+        form.style.display = form.style.display == 'none' ? 'flex' : 'none';
+    })
+
+    function removeAlertContainer() {
+        var alertContainer = document.querySelector('.alert__container');
+        if (alertContainer) {
+            alertContainer.remove();
+        }
+    }
+
+    setTimeout(removeAlertContainer, 5000);
+</script>
+<script th:inline="javascript">
+    // js for pagination
+    const element = document.querySelector(".pagination ul");
+    let totalPages = [[${totalPages}]];
+    let currentPage = [[${currentPage}]];  // Đặt giá trị page bắt đầu từ 0
+    let categoryId = [[${categoryId}]];
+    element.innerHTML = createPagination(totalPages, currentPage);
+
+    function createPagination(totalPages, currentPage) {
+        let liTag = '';
+        let active;
+        let beforePage = currentPage - 1;
+        let afterPage = currentPage + 1;
+
+        if (currentPage > 0) {
+
+            liTag += `<li class="btn prev" onclick="changePage(${currentPage - 1})"><span><i class="fas fa-angle-left"></i> Prev</span></li>`;
+        }
+
+        if (currentPage == totalPages) {
+            beforePage = beforePage - 2;
+        } else if (currentPage == totalPages - 1) {
+            beforePage = beforePage - 1;
+        }
+
+        if (currentPage == 0) {
+            afterPage = afterPage + 2;
+        } else if (currentPage == 1) {
+            afterPage = afterPage + 1;
+        }
+
+        for (var plength = beforePage; plength <= afterPage; plength++) {
+            if (plength >= totalPages) {
+                continue;
+            }
+
+            if (plength < 0) {
+                plength = plength + 1;
+            }
+
+            if (currentPage == plength) {
+                active = "active";
+            } else {
+                active = "";
+            }
+
+            liTag += `<li class="numb ${active}" onclick="changePage(${plength})"><span>${plength + 1}</span></li>`;
+        }
+
+        if (currentPage < totalPages - 1) {
+            if (currentPage < totalPages - 2) {
+                liTag += `<li class="dots"><span>...</span></li>`;
+            }
+        }
+
+        if (currentPage < totalPages - 1) {
+            liTag += `<li class="btn next" onclick="changePage(${currentPage + 1})"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+        }
+
+        element.innerHTML = liTag;
+        return liTag;
+    }
+
+    function changePage(newPage) {
+
+        window.location.href = `http://localhost:9999/admin/account?page=${newPage}`;
+    }
+</script>
+</html>

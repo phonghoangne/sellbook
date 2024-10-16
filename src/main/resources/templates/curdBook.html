@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Management')}">
+
+</head>
+
+
+<body>
+    <!-- header -->
+    <th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+    <!-- end header -->
+
+    <section class="location">
+        <div class="container">
+            <div class="location__container">
+                <div class="location__history">
+                    <a th:href="@{/admin}">
+                        Trang chủ
+                    </a>
+                </div>
+                <div class="">/</div>
+
+                <div class="location__now">
+                    <a th:href="@{/admin/book}">
+                       Management Book.
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="layout__container">
+                    <div class="layout__container-head">
+                        <div class="layout__container-head-title">
+                            <h3>
+                                CURD
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="layout__container-body">
+                        <th:block th:insert="~{/common/fragument.html :: body_left_admin}"></th:block>
+
+                        <div class="layout__container-body-right">
+                            <div class="layout__container-body-right-form">
+                                <div class="layout__container-body-right-title">
+                                    Form CURD
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <form th:action="@{/admin/book/save}" method="post" th:object="${editBook}"  id="edit_book_form" enctype="multipart/form-data">
+                                    <div class="alert__container top"  th:if="${success != null}">
+                                        <div class="alert__container-item success">
+                                            <div class="alert__content">
+                                                <div class="alert__content-title">
+                                                    <h2>Notification</h2>
+                                                </div>
+
+                                                <div class="alert__content-sub">
+                                                    <p th:text="${success}" >Change a few things up and try submitting again</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id">ID:</label>
+                                        <input type="text" id="id" name="id" readonly th:field="*{id}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Tên Sách:</label>
+                                        <input type="text" id="name" name="name"  th:field="*{name}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Giá:</label>
+                                        <input type="number" id="price" name="price"  th:field="*{price}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="publication-date">Ngày Xuất Bản:</label>
+                                        <input type="date" id="publication-date" name="publication-date"  th:field="*{publicationDate}" th:value="*{#dates.format(publicationDate, 'yyyy-MM-dd')}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="number-pages">Số Trang:</label>
+                                        <input type="number" id="number-pages" name="number-pages"  th:field="*{numberPages}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="publishing-company">Nhà Xuất Bản:</label>
+                                        <input type="text" id="publishing-company" name="publishing-company"  th:field="*{publishingCompany}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category-id">Thể Loại:</label>
+                                        <select type="text" id="category-id" name="category-id"  th:field="*{category}">
+                                            <option th:each="item : ${categoryList}" th:value="${item.id}" th:text="${item.name}">11</option>
+<!--                                            <option value="">11</option>-->
+<!--                                            <option value="">11</option>-->
+<!--                                            <option value="">11</option>-->
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="author">Tác Giả:</label>
+                                        <input type="text" id="author" name="author"  th:field="*{author}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="file">Hình ảnh:</label>
+                                        <input type="file" id="file" name="file">
+                                    </div>
+                                    <div class="button-group">
+                                        <button   class="button__item button__item-new" onclick="clearForm()" type="button">New</button>
+                                        <button   class="button__item button__item-edit" type="submit">Edit</button>
+                                        <button  class="button__item button__item-save" type="submit">Save</button>
+                                        <button   class="button__item button__item-delete" type="button"  onclick="deleteBook()" th:disabled="*{!(id >= 1)}">delete</button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <div id="book-modal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" id="close-button">&times;</span>
+                                    <h2>Thông Tin Sách</h2>
+                                    <form id="book-form">
+                                        <!-- Các trường nhập thông tin sách sẽ ở đây -->
+                                        <button type="button" id="save-button">Lưu</button>
+                                        <button type="button" id="cancel-button">Hủy</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layout__container-body-right-table">
+                        <table class="book-table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Sách</th>
+                                <th>Loại sách</th>
+                                <th>Giá</th>
+                                <th>Ngày phát hành</th>
+                                <th>Nhà xuất bản</th>
+                                <th>Số trang</th>
+                                <th>Tác giả</th>
+                                <th>Description</th>
+                                <th>Hành động</th>
+                            </tr>
+                            </thead>
+                            <tbody id="book-list">
+                            <tr th:each=" item: ${listBook}">
+                                <td th:text="${item.id}">1</td>
+                                <td class="text-eclipse" th:text="${item.name}">Tiểu thuyết A</td>
+                                <td class="text-eclipse" th:text="${item.category.name}">Tiểu thuyết A</td>
+                                <td class="text-eclipse"  th:text="${item.price}">Tiểu thuyết A</td>
+                                <td class="text-eclipse" th:text="${item.publicationDate}">Tiểu thuyết A</td>
+                                <td class="text-eclipse" th:text="${item.publishingCompany}">Tiểu thuyết A</td>
+                                <td class="text-eclipse" th:text="${item.numberPages}">Tiểu thuyết A</td>
+                                <td class="text-eclipse" th:text="${item.author}">Tiểu thuyết A</td>
+                                <td class="text-eclipse" th:text="${item.description}">Tiểu thuyết A</td>
+                                <td>
+                                    <div class="action__container">
+                                        <a class="action-button edit-button" th:href="@{/admin/book/edit(id=${item.id})}">Sửa</a>
+                                        <a class="action-button delete-button "  th:href="@{/admin/book/delete(id=${item.id})}">Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <th:block th:if="${totalPages > 1}">
+                            <div class="pagination__container">
+                                <div class="pagination">
+                                    <ul> <!--pages or li are comes from javascript --> </ul>
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+</body>
+
+<script th:src="@{/js/header-overlay.js}"></script>
+<script th:inline="javascript">
+    // js for pagination
+    const element = document.querySelector(".pagination ul");
+    let totalPages = [[${totalPages}]];
+    let currentPage = [[${currentPage}]];  // Đặt giá trị page bắt đầu từ 0
+    let categoryId = [[${categoryId}]];
+    element.innerHTML = createPagination(totalPages, currentPage);
+
+    function createPagination(totalPages, currentPage) {
+        let liTag = '';
+        let active;
+        let beforePage = currentPage - 1;
+        let afterPage = currentPage + 1;
+
+        if (currentPage > 0) {
+            liTag += `<li class="btn prev" onclick="changePage(${currentPage - 1})"><span><i class="fas fa-angle-left"></i> Prev</span></li>`;
+        }
+
+        if (currentPage > 2) {
+            liTag += `<li class="numb" onclick="changePage(0)"><span>1</span></li>`;
+            if (currentPage > 3) {
+                liTag += `<li class="dots"><span>...</span></li>`;
+            }
+        }
+
+        for (let plength = beforePage; plength <= afterPage; plength++) {
+            if (plength < 0 || plength >= totalPages) {
+                continue;
+            }
+
+            if (plength == currentPage) {
+                active = "active";
+            } else {
+                active = "";
+            }
+
+            liTag += `<li class="numb ${active}" onclick="changePage(${plength})"><span>${plength + 1}</span></li>`;
+        }
+
+        if (currentPage < totalPages - 4) {
+            liTag += `<li class="dots"><span>...</span></li>`;
+        }
+
+        if (currentPage < totalPages - 1) {
+            liTag += `<li class="numb" onclick="changePage(${totalPages - 1})"><span>${totalPages}</span></li>`;
+            liTag += `<li class="btn next" onclick="changePage(${currentPage + 1})"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+        }
+
+        element.innerHTML = liTag;
+        return liTag;
+    }
+
+
+    function changePage(newPage) {
+
+                window.location.href = `http://localhost:9999/admin/book?page=${newPage}`;
+
+
+    }
+</script>
+<script th:inline="javascript">
+    const selectForm = document.querySelector('.layout__container-body-right-title');
+    const selectCategory = document.querySelector('.filter__category-head');
+
+    selectCategory.addEventListener('click', () => {
+        const parentElement = selectCategory.parentElement;
+        const icon = selectCategory.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const list = parentElement.querySelector('.filter__category-list');
+        list.style.display = list.style.display == 'none' ? 'block' : 'none';
+    
+    })
+
+    selectForm.addEventListener('click', () => {
+        const parentElement = selectForm.parentElement;
+        const icon = selectForm.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const form = parentElement.querySelector('form');
+        form.style.display = form.style.display == 'none' ? 'flex' : 'none';
+    })
+
+    function clearForm() {
+        var inputs = document.getElementById('edit_book_form').querySelectorAll('input, select');
+        var deleteButton = document.querySelector('.button__item-delete');
+        var editButton = document.querySelector('.button__item-edit');
+        deleteButton.disabled = true;
+        editButton.disabled = true;
+        inputs.forEach(function (input) {
+            if (input.type !== 'button') {
+                input.value = '';
+            }
+        });
+        var select = document.getElementById('category-id');
+        select.selectedIndex = -1;
+    }
+
+    function deleteBook(){
+        var id = document.getElementById('id').value;
+        var buttonDelete = document
+        window.location.href = `http://localhost:9999/admin/book/delete?id=${id}`;
+    }
+
+    const successMessage = [[${messageSave}]];
+    const errorMessage = [[${errorMessage}]];
+    if(successMessage == null && errorMessage == null ){
+
+    }
+    else if(successMessage){
+        Swal.fire({
+            icon:"success",
+            title:"Thông Báo",
+            text:successMessage,
+            customClass: {
+                title: 'text-5xl',
+                htmlContainer: 'text-5xl',
+                text: 'text-5xl'
+            }
+        }).then(function (){
+            window.location.href ="/admin/book";
+        })
+    }else{
+        Swal.fire({
+            icon:"error",
+            title:"Thông Báo",
+            text:errorMessage
+        })
+    }
+    function removeAlertContainer() {
+        var alertContainer = document.querySelector('.alert__container');
+        if (alertContainer) {
+            alertContainer.remove();
+        }
+    }
+
+    setTimeout(removeAlertContainer, 5000);
+</script>
+
+</html>

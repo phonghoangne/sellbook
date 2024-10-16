@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:if="${title == 'Home'}" rel="stylesheet" th:href="@{/styles/home.css}">
+    <link th:if="${title == 'Shop'}" rel="stylesheet" th:href="@{/styles/products.css}">
+    <link th:if="${title == 'Login'}" rel="stylesheet" th:href="@{/styles/login.css}">
+    <link th:if="${title == 'Register'}" rel="stylesheet" th:href="@{/styles/register.css}">
+    <link th:if="${title == 'Product - Details' }" rel="stylesheet" th:href="@{/styles/product2.css}">
+    <link th:if="${title == 'Management'}" rel="stylesheet" th:href="@{/styles/curd.css}">
+    <link th:if="${title == 'Cart'}" rel="stylesheet" th:href="@{/styles/cart.css}">
+    <link th:if="${title == 'Payment'}" rel="stylesheet" th:href="@{/styles/payment.css}">
+    <link th:if="${title == 'bill'}" rel="stylesheet" th:href="@{/styles/bill.css}">
+    <link th:if="${title == 'info'}" rel="stylesheet" th:href="@{/styles/developers.css}">
+    <link th:if="${title == 'option'}" rel="stylesheet" th:href="@{/styles/optionDeveloper.css}">
+    <link th:if="${title == 'Management - Bill'}" rel="stylesheet" th:href="@{/styles/curd_bill.css}">
+    <link rel="stylesheet" th:href="@{/styles/alert.css}">
+    <link rel="stylesheet" th:href="@{/styles/overlay_header.css}">
+    <link rel="stylesheet" th:href="@{/styles/scroll.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.min.css
+    " rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/images/android-chrome-512x512.png">
+    <title th:text="${title}">Trang Chủ</title>
+</th:block>
+
+<th:block th:fragment="header">
+    <div class="header__message">
+        <div class="header__message-content">
+            miễn phí vận chuyển cho đơn hàng trên 250k
+        </div>
+    </div>
+    <!-- end message header -->
+
+    <!-- header -->
+    <header>
+        <div class="container">
+            <div class="header__container">
+                <!-- logo header -->
+                <div class="header__container-logo">
+                    <a th:href="@{/home/view}">
+                        <img th:src="@{/images/logo-no-background.png}" alt="">
+                    </a>
+                </div>
+                <!-- end logo header -->
+
+                <!-- navbar_header -->
+                <ul class="header__container-nav">
+                    <li>
+                        <a th:href="@{/home/view}">
+                            trang chủ
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/book/shop}" class="flex-center">
+                            sản phẩm <i class="fa-solid fa-angle-down"></i>
+                        </a>
+
+                        <div class="sub_menu">
+                            <ul>
+                                <li th:each="item : ${navCategory}">
+                                    <a th:href="@{/book/category(categoryId = ${item.id})}" th:text="${item.name}">
+                                        sách kinh tế
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+<!--                    <li>-->
+<!--                        <a href="" class="text-sale">-->
+<!--                            sale-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            hàng mới về-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            chính sách-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">-->
+<!--                            cửa hàng-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+                    <li>
+                        <a th:href="@{/info/optionDev}">
+                            về chúng tôi
+                        </a>
+                    </li>
+                </ul>
+                <!-- end navbar_header -->
+
+                <!-- option user -->
+                <ul class="header__container-option">
+                    <li class="option__user search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </li>
+
+                    <li class="option__user user">
+                        <i class="fa-regular fa-user"></i>
+                        <div class="option__user-sub account">
+                            <ul class="option__user-sub-list">
+                                <li class="option__user-sub-list-item">
+                                    <a th:if="${session.username == null}" th:href="@{/account/login}">
+                                        tài khoản
+                                    </a>
+                                    <a th:if="${session.username != null}" th:text="${session.username}">
+
+                                    </a>
+                                </li>
+                                <li th:if="${session.username == 'admin'}" class="option__user-sub-list-item">
+                                    <a  th:href="@{/admin}">
+                                        Management
+                                    </a>
+                                </li>
+                                <li th:if="${session.username != null}"  class="option__user-sub-list-item">
+                                    <a th:href="@{/cart/view}">
+                                        giỏ hàng
+                                    </a>
+                                </li>
+                                <li th:if="${session.username != null}" class="option__user-sub-list-item">
+                                    <a  th:href="@{/account/changePassword}">
+                                        Đổi mật khẩu
+                                    </a>
+                                </li>
+                                <li th:if="${session.username != null}" class="option__user-sub-list-item">
+                                    <a  th:href="@{/account/logout}">
+                                        đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+<!--                    <li class="option__user like">-->
+<!--                        <i class="fa-regular fa-heart"></i>-->
+<!--                    </li>-->
+
+                    <li class="option__user cart">
+                        <a th:href="@{/cart/view}"><i class="fa-solid fa-bag-shopping"></i></a>
+                    </li>
+                </ul>
+                <!-- end option user -->
+            </div>
+        </div>
+    </header>
+
+    <header class="overlay__header-search">
+        <header>
+            <div class="container container__header-overlay">
+                <div class="header__container">
+                    <!-- logo header -->
+                    <div class="header__container-logo">
+                        <a href="index.html">
+                            <img th:src="@{/images/logo-no-background.png}" alt="">
+                        </a>
+                    </div>
+                    <!-- end logo header -->
+
+                    <!-- navbar_header -->
+                    <div class="header__container-nav">
+                     <form method="get" th:action="@{/book/search}">
+                         <div class="search__container">
+                             <input type="text" name="searchKey" id="searchKey" placeholder="Nhập sản phẩm bạn muốn tìm kiếm">
+                             <button type="submit" class="search-icon">
+                                 <i class="fa-solid fa-magnifying-glass"></i>
+                             </button>
+                         </div>
+                     </form>
+                    </div>
+                    <!-- end navbar_header -->
+
+                    <!-- option user -->
+                    <ul class="header__container-option">
+
+                        <li class="option__user user">
+                            <a th:href="@{/home/view}"> Home</a>
+                        </li>
+
+                        <li class="option__user like">
+                            <a th:href="@{/book/shop}"> Book</a>
+                        </li>
+
+<!--                        <li class="option__user cart">-->
+<!--                            <i class="fa-regular fa-heart"></i>-->
+<!--                        </li>-->
+                    </ul>
+                    <!-- end option user -->
+                </div>
+            </div>
+        </header>
+    </header>
+</th:block>
+
+<th:block th:fragment="footer">
+    <footer>
+        <div class="container">
+            <div class="footer__container">
+                <div class="footer__container-about">
+                    <div class="footer__container-about-logo">
+                        <img th:src="@{/images/logo-no-background.png}" alt="">
+                    </div>
+
+                    <div class="footer__container-about-location">
+                        <div class="about__location-title">
+                            <i class="fa-solid fa-location-dot"></i> Địa chỉ
+                        </div>
+
+                        <ul class="list__location">
+                            <li class="list__location-item">
+                                | Store 1: 35/9 Phan Văn Hớn, Quận 12, Thành Phố Hồ Chí Minh
+                            </li>
+
+                            <li class="list__location-item">
+                                | Store 1: 35/9 Phan Văn Hớn, Quận 12, Thành Phố Hồ Chí Minh
+                            </li>
+
+                            <li class="list__location-item">
+                                | Store 1: 35/9 Phan Văn Hớn, Quận 12, Thành Phố Hồ Chí Minh
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer__container-about-phone">
+                        <div class="about__phone-title">
+                            <i class="fa-solid fa-phone"></i> Số điện thoại: 0398785643
+                        </div>
+                    </div>
+
+                    <div class="footer__container-about-gmail">
+                        <div class="about__gmail-title">
+                            <i class="fa-solid fa-envelope"></i> langthangstore@gmail.com
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer__container-policy">
+                    <div class="footer__container-policy-title">
+                        <h3>
+                            chính sách
+                        </h3>
+                    </div>
+
+                    <ul class="footer__container-policy-list">
+                        <li class="footer__container-policy-list-item">
+                            <a href="">
+                                Trang chủ
+                            </a>
+                        </li>
+
+                        <li class="footer__container-policy-list-item">
+                            <a href="">
+                                Sản phẩm
+                            </a>
+                        </li>
+
+                        <li class="footer__container-policy-list-item">
+                            <a href="">
+                                SALE
+                            </a>
+                        </li>
+
+                        <li class="footer__container-policy-list-item">
+                            <a href="">
+                                Hàng mới về
+                            </a>
+                        </li>
+
+                        <li class="footer__container-policy-list-item">
+                            <a href="">
+                                Cửa hàng
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer__container-support">
+                    <div class="footer__container-support-title">
+                        <h3>
+                            hỗ trợ khách hàng
+                        </h3>
+                    </div>
+
+                    <ul class="footer__container-support-list">
+                        <li class="footer__container-support-list-item">
+                            <a href="">
+                                Chính sách đổi trả
+                            </a>
+                        </li>
+
+                        <li class="footer__container-support-list-item">
+                            <a href="">
+                                Chính sách bảo hành
+                            </a>
+                        </li>
+
+                        <li class="footer__container-support-list-item">
+                            <a href="">
+                                Chính sách vận chuyển
+                            </a>
+                        </li>
+
+                        <li class="footer__container-support-list-item">
+                            <a href="">
+                                Chính sách thanh toán
+                            </a>
+                        </li>
+
+                        <li class="footer__container-support-list-item">
+                            <a href="">
+                                Chính sách bảo mật
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer__container-social">
+                    <div class="footer__container-social-title">
+                        <h3>
+                            Mạng xã hội langthang
+                        </h3>
+                    </div>
+
+                    <div class="footer__container-social-list">
+                        <div class="footer__container-social-list-item">
+                            <a href="">
+                                <i class="fa-brands fa-facebook"></i>
+                            </a>
+                        </div>
+
+                        <div class="footer__container-social-list-item">
+                            <a href="">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        </div>
+
+                        <div class="footer__container-social-list-item">
+                            <a href="">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        </div>
+
+                        <div class="footer__container-social-list-item">
+                            <a href="">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </footer>
+
+    <div class="scroll-top">
+        <i class="fa-solid fa-circle-up"></i>
+    </div>
+</th:block>
+<th:block th:fragment="body_left_admin">
+    <div class="layout__container-body-left">
+
+        <div class="filter__category">
+            <div class="filter__category-head">
+                <div class="filter__category-head-title">
+                    <h3>
+                        Management
+                    </h3>
+                </div>
+
+                <div class="filter__category-head-icon">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            </div>
+
+            <ul class="filter__category-list">
+                <li class="filter__category-list-item">
+                    <label for=""><a th:href="@{/admin/account}">Account</a></label>
+                </li>
+
+                <li class="filter__category-list-item">
+                    <label for=""><a th:href="@{/admin/book}">Book</a></label>
+                </li>
+
+                <li class="filter__category-list-item">
+                    <label for=""><a th:href="@{/admin/category}">Category</a></label>
+                </li>
+
+                <li class="filter__category-list-item">
+                    <label for=""><a th:href="@{/admin/bill}">Bill</a></label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</th:block>
+</html>

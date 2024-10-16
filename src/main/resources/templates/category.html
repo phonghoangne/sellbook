@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Category - CRUD')}">
+
+<body>
+    <!-- header -->
+    <th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+
+    <!-- end header -->
+
+    <section class="location">
+        <div class="container">
+            <div class="location__container">
+                <div class="location__history">
+                    <a href="">
+                        Trang chủ
+                    </a>
+                </div>
+                <div class="">/</div>
+
+                <div class="location__now">
+                    <a href="">
+                       CURD
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="layout__container">
+                    <div class="layout__container-head">
+                        <div class="layout__container-head-title">
+                            <h3>
+                                CURD
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="layout__container-body">
+
+                        <th:block th:insert="~{/common/fragument.html :: body_left_admin}"></th:block>
+
+                        <div class="layout__container-body-right">
+                            <div class="layout__container-body-right-form">
+                                <div class="layout__container-body-right-title">
+                                    Form CURD
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="id">ID:</label>
+                                        <input type="text" id="id" name="id" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Tên Sách:</label>
+                                        <input type="text" id="name" name="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Giá:</label>
+                                        <input type="text" id="price" name="price" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="publication-date">Ngày Xuất Bản:</label>
+                                        <input type="date" id="publication-date" name="publication-date" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="number-pages">Số Trang:</label>
+                                        <input type="number" id="number-pages" name="number-pages" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="publishing-company">Nhà Xuất Bản:</label>
+                                        <input type="text" id="publishing-company" name="publishing-company" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category-id">ID Thể Loại:</label>
+                                        <select type="text" id="category-id" name="category-id">
+                                            <option value="">11</option>
+                                            <option value="">11</option>
+                                            <option value="">11</option>
+                                            <option value="">11</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="author">Tác Giả:</label>
+                                        <input type="text" id="author" name="author" required>
+                                    </div>
+                                    <button type="submit">Thêm Sách</button>
+                                </form>
+                            </div>
+
+                            <div class="layout__container-body-right-table">
+                                <table class="book-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Tên Sách</th>
+                                            <th>Giá</th>
+                                            <th>Ngày Xuất Bản</th>
+                                            <th>Số Trang</th>
+                                            <th>Nhà Xuất Bản</th>
+                                            <th>ID Thể Loại</th>
+                                            <th>Tác Giả</th>
+                                            <th>Thao Tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="book-list">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Tiểu thuyết A</td>
+                                            <td>20.00</td>
+                                            <td>2023-10-01</td>
+                                            <td>250</td>
+                                            <td>Nhà Xuất Bản ABC</td>
+                                            <td>101</td>
+                                            <td>Tác Giả X</td>
+                                            <td>
+                                                <button class="action-button edit-button">Sửa</button>
+                                                <button class="action-button delete-button">Xóa</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Tiểu thuyết B</td>
+                                            <td>25.50</td>
+                                            <td>2023-09-15</td>
+                                            <td>320</td>
+                                            <td>Nhà Xuất Bản XYZ</td>
+                                            <td>102</td>
+                                            <td>Tác Giả Y</td>
+                                            <td>
+                                                <button class="action-button edit-button">Sửa</button>
+                                                <button class="action-button delete-button">Xóa</button>
+                                            </td>
+                                        </tr>                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="book-modal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" id="close-button">&times;</span>
+                                    <h2>Thông Tin Sách</h2>
+                                    <form id="book-form">
+                                        <!-- Các trường nhập thông tin sách sẽ ở đây -->
+                                        <button type="button" id="save-button">Lưu</button>
+                                        <button type="button" id="cancel-button">Hủy</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+
+</body>
+
+<script th:src="@{/js/header-overlay.js}"></script>
+<script>
+    const selectForm = document.querySelector('.layout__container-body-right-title');
+    const selectCategory = document.querySelector('.filter__category-head');
+
+    selectCategory.addEventListener('click', () => {
+        const parentElement = selectCategory.parentElement;
+        const icon = selectCategory.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const list = parentElement.querySelector('.filter__category-list');
+        list.style.display = list.style.display == 'none' ? 'block' : 'none';
+    
+    })
+
+    selectForm.addEventListener('click', () => {
+        const parentElement = selectForm.parentElement;
+        const icon = selectForm.querySelector('i');
+        icon.style.transform = icon.style.transform == 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        const form = parentElement.querySelector('form');
+        form.style.display = form.style.display == 'none' ? 'flex' : 'none';
+    })
+</script>
+
+</html>

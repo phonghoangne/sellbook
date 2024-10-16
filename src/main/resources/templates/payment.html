@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Payment')}">
+
+</head>
+
+<body>
+<!-- message_header -->
+<th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+
+<!-- end header -->
+
+<section class="location">
+        <div class="container">
+            <div class="location__container">
+                <div class="location__history">
+                    <a href=""> Trang chủ </a>
+                </div>
+                <div class="">/</div>
+
+                <div class="location__now">
+                    <a href=""> Thanh toán </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <form method="post" th:action="@{/cart/bill}" th:object="${accountAdd}">
+        <section class="payment">
+            <div class="container">
+                <div class="payment__container">
+                    <div class="payment__container-title">
+                        billing detail
+                    </div>
+
+                    <div class="payment__container-form">
+                        <div class="form__container">
+                            <label for="fullname">Fullname <span class="requirt-text">*</span></label>
+                            <input required type="text" name="fullname" id="fullname" placeholder="fullname" th:value="*{fullname}">
+                        </div>
+
+
+                        <div class="form__container form__container-many">
+                            <label for="address">Address <span class="requirt-text">*</span></label>
+                            <input required type="text" name="address" id="address" placeholder="Street Address">
+                        </div>
+
+                        <div class="form__layout-row">
+                            <div class="form__container">
+                                <label for="phone">Phone <span class="requirt-text">*</span></label>
+                                <input required type="number" name="phone" id="phone" placeholder="Phone" >
+                            </div>
+
+                            <div class="form__container">
+                                <label for="email">Email <span class="requirt-text">*</span></label>
+                                <input required type="email" name="email" id="email" placeholder="Email" th:value="*{email}">
+                            </div>
+                        </div>
+
+                        <div class="form__container">
+                            <label for="note">Order notes</label>
+                            <input required type="text" name="note" id="note" placeholder="Note about your order">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bill-demo">
+            <div class="container">
+                <div class="bill__demo-container">
+                    <div class="bill__demo-container-title">
+                        Your order
+                    </div>
+
+                    <div class="bill__demo-container-table">
+                        <div class="bill__container-products">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Product
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Quantity
+                                        </th>
+                                        <th>
+                                            Total
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr th:each="item, itemStart :${cartPayment}">
+                                        <td th:text="${itemStart.index + 1}">1</td>
+                                        <td th:text="${item.book.name}">Cẩm Nang Luyện Thi Năng Lực Tiếng Hàn Topik II Intermediate - Advanced</td>
+                                        <td >
+<!--                                            <th:block th:each="entry:${priceList}" >-->
+<!--                                                <span th:if="${item.book.getId() == entry.key}" th:text="${entry.value}"></span>-->
+<!--                                            </th:block>-->
+                                            <p> <span th:text="${#numbers.formatDecimal(item.book.price, 0, 'COMMA', 0, 'POINT')}"></span> ￥</p>
+                                        </td>
+                                        <td th:text="${item.quantity}">1</td>
+                                        <td><p> <span th:text="${#numbers.formatDecimal(item.totalProduct, 0, 'COMMA', 0, 'POINT')}"></span> ￥</p></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bill__demo-container-total bill__demo-container-content">
+                        <div class="bill__demo-container-subtotal-title bill__demo-container-head">
+                            Total
+                        </div>
+
+                        <div class="bill__demo-container-subtotal-value bill__demo-container-value">
+                            <span th:text="${#numbers.formatDecimal(priceTotalCart, 0, 'COMMA', 0, 'POINT')}"></span>￥
+                        </div>
+                    </div>
+
+                        <button type="submit" class="button-submit">
+                            place orders
+                        </button>
+                </div>
+            </div>
+        </section>
+        </form>
+    </main>
+
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+</body>
+
+<script th:src="@{/js/header-overlay.js}"></script>
+</html>

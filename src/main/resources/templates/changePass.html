@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/common/fragument.html :: head(title='Login')}">
+
+</head>
+
+<body>
+    <!-- message_header -->
+    <th:block th:insert="~{/common/fragument.html :: header}"></th:block>
+    <!-- end header -->
+
+    <main>
+        <div class="container">
+            <div class="login__container">
+                <div class="login__container-title">
+                    <h3>
+                        đăng nhập tài khoản
+                    </h3>
+                </div>
+
+                <div class="login__container-form">
+                    <div class="login__container-form-title">
+                        <h3>
+                           Quên mật khẩu
+                        </h3>
+                    </div>
+                    <form action="/account/changePassword" method="post" >
+                        <div class="alert__container top"  th:if="${error != null}">
+                            <div class="alert__container-item danger">
+                                <div class="alert__content">
+                                    <div class="alert__content-title">
+                                        <h2>Notification</h2>
+                                    </div>
+
+                                    <div class="alert__content-sub">
+                                        <p th:text="${error}" >Change a few things up and try submitting again</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert__container top"  th:if="${success != null}">
+                            <div class="alert__container-item success">
+                                <div class="alert__content">
+                                    <div class="alert__content-title">
+                                        <h2>Notification</h2>
+                                    </div>
+
+                                    <div class="alert__content-sub">
+                                        <p th:text="${success}" >Change a few things up and try submitting again</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="login__container-form-item">
+                            <input type="password" id="psw" name = "psw" placeholder="Nhập mật khẩu">
+                        </div>
+                        <div class="login__container-form-item">
+                            <input type="password" id="pswn" name ="pswn" placeholder="Nhập mật khẩu mới ">
+                        </div>
+                        <div class="login__container-form-item">
+                            <input type="password" id="rppswn" name ="rppswn" placeholder=" Xác Nhận mật khẩu mới">
+                        </div>
+
+                        <div class="login__container-form-item">
+                            <button type="submit">
+                                đăng nhập
+                            </button>
+                        </div>
+
+                        <div class="login__container-form-item">
+                            <div class="option__login-social">
+                                <ul class="list__social">
+                                    <li class="list__social-item facebook">
+                                        <a href="">
+                                            FACEBOOK <i class="fa-brands fa-facebook"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="list__social-item google">
+                                        <a href="">
+                                            GOOGLE <i class="fa-brands fa-google"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="login__container-form-item">
+                            <div class="option__register">
+                                <a th:href="@{/account/register}">
+                                    Bạn chưa có tài khoản ?
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <th:block th:insert="~{/common/fragument.html :: footer}"></th:block>
+</body>
+
+<script th:src="@{/js/header-overlay.js}"></script>
+<script  th:inline="javascript">
+    // Kiểm tra xem có thông báo thành công được truyền từ controller không
+    const successMessage = [[${successMessage}]];
+    const errorMessage = [[${errorMessage}]];
+    if(successMessage == null && errorMessage == null ){
+
+    }
+    else if(successMessage){
+        Swal.fire({
+            icon:"success",
+            title:"Thông Báo",
+            text:successMessage,
+            customClass: {
+                title: 'text-5xl',
+                htmlContainer: 'text-5xl',
+                text: 'text-5xl'
+            }
+        }).then(function (){
+                window.location.href ="/home/view";
+        })
+    }else{
+        Swal.fire({
+            icon:"error",
+            title:"Thông Báo",
+            text:errorMessage
+        })
+    }
+
+    // const infor = [[${infor}]]
+    // if(infor){
+    //     Swal.fire({
+    //         icon:"infor",
+    //         title:"Thông Báo",
+    //         text:infor,
+    //     }).then({
+    //
+    //     })
+    // }
+    function removeAlertContainer() {
+        var alertContainer = document.querySelector('.alert__container');
+        var dangerAlertItem = alertContainer.querySelector('.alert__container-item.danger');
+        if (!dangerAlertItem) {
+            alertContainer.remove();
+            window.location.href ="http://localhost:9999/home/view";
+        }else{
+            alertContainer.remove();
+        }
+    }
+
+    setTimeout(removeAlertContainer, 5000);
+</script>
+
+</html>
